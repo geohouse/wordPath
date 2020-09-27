@@ -386,6 +386,32 @@ slider.addEventListener("change", updateSlider);
 // Toggling whether to calculate and show found words or not
 let isToggled = false;
 
+
+// Make a list of all the 2-letter stems that ARE represented in the splitByFirstLetter_obj
+let representedTwoLetterStems = [];
+function calculateTwoLetterStems(){
+    let currLetterList = [];
+    let currTwoLetterEntry = "";
+    for(i=1; i<27; i++){
+        // From https://stackoverflow.com/questions/3145030/convert-integer-into-its-character-equivalent-where-0-a-1-b-etc/3145054#3145054
+        currLetter = String.fromCharCode(96 + i); // where n is 0, 1, 2 ...
+        currLetterList = splitByFirstLetter_obj[currLetter];
+        for(let j = 0; j < currLetterList.length; j++){
+            currTwoLetterEntry = currLetterList[j].slice(0,2);
+            if(representedTwoLetterStems.includes(currTwoLetterEntry)){
+                continue;
+            } else{
+                representedTwoLetterStems.push(currTwoLetterEntry);
+            }
+        }
+    }
+}
+
+function calculateAnswers(){
+    yield
+}
+
+
 function showWordAnswers(){
     isToggled = toggle.checked;
     if(isToggled){
@@ -402,6 +428,10 @@ function showWordAnswers(){
 
         let testOut3 = checkIfWordStartInList("axz");
         console.log("testOut3 is: " + testOut3);
+
+        representedTwoLetterStems();
+        console.log("The two letter stems are: ");
+        console.lot(representedTwoLetterStems);
 
     }
     
