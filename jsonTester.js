@@ -95,6 +95,43 @@ function splitArrayByFirstLetter(){
     }
 }
 
+function checkIfWordStartInList(wordStart){
+    // Will act as 3-level boolean with 
+    // 0 = wordStart not in the list (stop this direction of searching),
+    // 1 = wordStart in the list as a subset of a longer word (so keep the search going)
+    // 2 = wordStart is a word in the list, and should be counted as another word found (and keep search going)
+    let wordStartInList = 0;
+    let firstLetter = wordStart[0];
+    let wordStartLength = wordStart.length;
+    let currLetterWordList = splitByFirstLetter_obj[firstLetter];
+    let currWordFromList = "";
+    for(let i = 0; i < currLetterWordList.length; i++){
+        currWordFromList = currLetterWordList[i];
+        if(currWordFromList === wordStart){
+            console.log("Word match found for word: " + wordStart);
+            wordStartInList = 2;
+            return wordStartInList;
+        }else if(currWordFromList.length < wordStartLength){
+            continue;
+        } else{
+            if(currWordFromList.slice(0,wordStartLength) === wordStart){
+                // Set to 1 but don't return, because this may be a full word as well as the stem of another
+                // (search path will continue in both cases)
+                wordStartInList = 1
+            }
+        }
+    }
+    return wordStartInList;
+}
+
+let testOut1 = checkIfWordStartInList("aardvark");
+console.log("testOut1 is: " + testOut1);
+
+let testOut2 = checkIfWordStartInList("cat");
+console.log("testOut2 is: " + testOut2);
+
+let testOut3 = checkIfWordStartInList("axz");
+console.log("testOut3 is: " + testOut3);
 
 
 let isToggled = false;
