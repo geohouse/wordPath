@@ -429,7 +429,7 @@ function showWordAnswers(){
         let testOut3 = checkIfWordStartInList("axz");
         console.log("testOut3 is: " + testOut3);
 
-        representedTwoLetterStems();
+        calculateTwoLetterStems();
         console.log("The two letter stems are: ");
         console.lot(representedTwoLetterStems);
 
