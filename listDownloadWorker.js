@@ -9,7 +9,7 @@ onmessage = function (input){
         // Success!
         letterArray = JSON.parse(this.response);
         console.log("In worker and downloaded OK.");
-        //console.log(letterArray);
+        console.log(letterArray);
     } else {
         // We reached our target server, but it returned an error
 
