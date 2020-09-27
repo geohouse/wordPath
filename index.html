@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+<head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="wordPath.css">
+    <script src="wordPath.js" defer></script>
+
+
+</head>
+
+<body>
+
+    <div>
+        <button type="button" id="new-game">Re-shuffle for a new game</button>
+    </div>
+
+    <div class="slider-div">
+        <input type="range" id = "slider" name= "slider" min="1" max = "10" step="1" value="5">
+        <label id="slide-label" for="slider">Number of vowels to include</label>
+    </div>
+
+    <div>
+        <p>
+            <span id="num-vowel">5</span>
+            <span id="vowel-label">vowels will be included</span>
+        </p>
+    </div>
+
+    <section id="timer-buttons">
+        <div>
+            <button type="button" id="countdown-start">Start the countdown!</button>
+        </div>
+
+        <div>
+            <button type="button" id="countdown-stop">Stop the countdown!</button>
+        </div>
+
+        <div>
+            <button type="button" id="countdown-restart">Reset the countdown!</button>
+        </div>
+
+    </section>
+    <p id="countdown-timer">2 min, 0 sec</p>
+
+
+</body>
+
+</html>
+
+
+
+
+

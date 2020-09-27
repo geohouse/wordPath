@@ -1,0 +1,114 @@
+td{
+    border: solid black 2px;
+    font-size: 36pt;
+    font-family:monospace;
+    background-color: lavender;
+    font-weight:bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    
+}
+
+#new-game{
+    background-color: yellow;
+    border: solid rebeccapurple 5px;
+    border-radius: 10px;
+    width: 300px;
+    height: 100px;
+    font-size: 18pt;
+    
+}
+
+#countdown-start{
+    background-color: lightgreen;
+    border-radius: 10px;
+    width: 200px;
+    height: 75px;
+    font-size: 18pt;
+
+}
+
+#countdown-stop{
+    background-color: lightsalmon;
+    border-radius: 10px;
+    width: 200px;
+    height: 75px;
+    font-size: 18pt;
+
+}
+
+#countdown-restart{
+    background-color: lightsteelblue;
+    border-radius: 10px;
+    width: 200px;
+    height: 75px;
+    font-size: 18pt;
+
+}
+
+section{
+    display:flex;
+}
+
+#countdown-timer{
+    font-size: 18pt;
+    color: teal;
+}
+
+#slider{
+    width: 40%;
+    height: 30px;
+    background: lightgray;
+    outline: none;
+    opacity: 0.7;
+    transition opacity 0.2s;
+    border: solid gray 2px;
+    border-radius: 5px;
+}
+
+#slider:hover{
+    opacity: 1;
+}
+
+#slider::-webkit-slider-thumb{
+    appearance: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: greenyellow;
+    cursor: pointer;
+}
+
+#slider::-moz-slider-thumb{
+    appearance: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: greenyellow;
+    cursor: pointer;
+}
+
+#vowel-label{
+    font-size: 14pt;
+    font-weight: bold;;
+}
+
+#slide-label{
+    font-size: 14pt;
+    font-weight: bold;;
+}
+
+#num-vowel{
+    font-size: 14pt;
+    font-weight: bold;;
+}
+
+/*
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+*/
