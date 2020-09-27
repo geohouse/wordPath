@@ -8,7 +8,7 @@ onmessage = function (input){
     if (this.status >= 200 && this.status < 400) {
         // Success!
         letterArray = JSON.parse(this.response);
-        console.log("In worker and downloaded OK.");
+        console.log("In worker and downloaded OK 2.");
         console.log(letterArray);
     } else {
         // We reached our target server, but it returned an error
