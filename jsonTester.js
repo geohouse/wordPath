@@ -11,10 +11,10 @@ let letterArray = [];
 
 if(window.Worker) {
     const downloadWorker = new Worker("listDownloadWorker.js");
-    downloadWorker.postMessage("a");
+    //downloadWorker.postMessage("a");
     downloadWorker.onmessage = function(returnedArray){
         letterArray = returnedArray.data;
-        console.log("return from worker.1");
+        console.log("return from worker.2");
         console.log(letterArray);
     }
 } else{
