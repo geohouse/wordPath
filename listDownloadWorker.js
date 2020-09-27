@@ -1,7 +1,8 @@
 let letterArray = [];
 onmessage = function (input){
     var request = new XMLHttpRequest();
-    request.open('GET', 'https://raw.githubusercontent.com/words/an-array-of-english-words/master/index.json', false);
+    request.open('GET' , "word-list.json");
+    //request.open('GET', 'https://raw.githubusercontent.com/words/an-array-of-english-words/master/index.json', false);
 
     request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
