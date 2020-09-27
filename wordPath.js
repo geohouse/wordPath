@@ -431,7 +431,7 @@ function showWordAnswers(){
 
         calculateTwoLetterStems();
         console.log("The two letter stems are: ");
-        console.lot(representedTwoLetterStems);
+        console.log(representedTwoLetterStems);
 
     }
     
