@@ -21,6 +21,7 @@ onmessage = function (input){
     };
 
     request.send();
+
+    postMessage(letterArray);
 }
 
-postMessage(letterArray);
