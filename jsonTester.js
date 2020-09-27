@@ -82,5 +82,24 @@ function splitArrayByFirstLetter(){
     }
 }
 
-splitArrayByFirstLetter();
+
+
+let isToggled = false;
+
+function showWordAnswers(){
+    isToggled = toggle.checked;
+    if(isToggled){
+        console.log("Showing answers");
+        console.log(letterArray);
+        splitArrayByFirstLetter();
+
+    }
+    
+}
+
+let toggle = document.getElementById("toggle");
+toggle.addEventListener("click", showWordAnswers);
+
+
+
 
