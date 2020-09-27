@@ -66,6 +66,7 @@ function getArrayIndex(firstLetterToMatch){
 }
 
 let splitByFirstLetter_obj = {};
+let listLengthEachLetter = {};
 function splitArrayByFirstLetter(){
     let currLetter = "";
     let nextLetter = "";
@@ -90,6 +91,7 @@ function splitArrayByFirstLetter(){
         // Here assigning in (shallow) copied entries of the original list that start with 
         // each letter of the alphabet
         splitByFirstLetter_obj[currLetter] = letterArray.slice(currLetterStartIndex, nextLetterStartIndex);
+        listLengthEachLetter[currLetter] = nextLetterStartIndex - currLetterStartIndex; 
     }
 }
 
