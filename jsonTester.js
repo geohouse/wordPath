@@ -89,7 +89,7 @@ function splitArrayByFirstLetter(){
         // Need to use [] when using a var to provide the name for the key in an object.
         // Here assigning in (shallow) copied entries of the original list that start with 
         // each letter of the alphabet
-        splitArrayByFirstLetter_obj[currLetter] = letterArray.slice(currLetterStartIndex, nextLetterStartIndex);
+        splitByFirstLetter_obj[currLetter] = letterArray.slice(currLetterStartIndex, nextLetterStartIndex);
     }
 }
 
