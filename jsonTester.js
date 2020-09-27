@@ -77,10 +77,19 @@ function splitArrayByFirstLetter(){
         currLetter = String.fromCharCode(96 + i); // where n is 0, 1, 2 ...
         currLetterStartIndex = getArrayIndex(currLetter);
         console.log("The curr letter is: " + currLetter + " with list index: " + currLetterStartIndex);
+        // Only look for the next letter if this is at most the second to the last letter in the alphabet.  
+        if(i<26){
+            nextLetter = String.fromCharCode(96 + i + 1); // where n is 0, 1, 2 ...
+            nextLetterStartIndex = getArrayIndex(nextLetter);
+            console.log("The next letter is: " + nextLetter + " with list index: " + nextLetterStartIndex);
+        } else{
+            nextLetterStartIndex = letterArray.length - 1;
+        }
 
-        nextLetter = String.fromCharCode(96 + i + 1); // where n is 0, 1, 2 ...
-        nextLetterStartIndex = getArrayIndex(nextLetter);
-        console.log("The next letter is: " + nextLetter + " with list index: " + nextLetterStartIndex);
+        // Need to use [] when using a var to provide the name for the key in an object.
+        // Here assigning in (shallow) copied entries of the original list that start with 
+        // each letter of the alphabet
+        splitArrayByFirstLetter_obj[currLetter] = letterArray.slice(currLetterStartIndex, nextLetterStartIndex);
     }
 }
 
