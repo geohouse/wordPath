@@ -124,14 +124,7 @@ function checkIfWordStartInList(wordStart){
     return wordStartInList;
 }
 
-let testOut1 = checkIfWordStartInList("aardvark");
-console.log("testOut1 is: " + testOut1);
 
-let testOut2 = checkIfWordStartInList("cat");
-console.log("testOut2 is: " + testOut2);
-
-let testOut3 = checkIfWordStartInList("axz");
-console.log("testOut3 is: " + testOut3);
 
 
 let isToggled = false;
@@ -142,6 +135,16 @@ function showWordAnswers(){
         console.log("Showing answers");
         console.log(letterArray);
         splitArrayByFirstLetter();
+
+
+        let testOut1 = checkIfWordStartInList("aardvark");
+        console.log("testOut1 is: " + testOut1);
+
+        let testOut2 = checkIfWordStartInList("cat");
+        console.log("testOut2 is: " + testOut2);
+
+        let testOut3 = checkIfWordStartInList("axz");
+        console.log("testOut3 is: " + testOut3);
 
     }
     
