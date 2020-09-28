@@ -407,36 +407,28 @@ function calculateTwoLetterStems(){
     }
 }
 
-// Will be an array of arrays with each array being the cell locations (1 -16 from top left to lower right)
-// that have been traversed for one possible word, and a different array for each word trial
-let locationsVisitedArray = [];
-// Same as the locationsVisitedArray except stores the letters themselves for checking instead.
-let lettersVisitedArray = [];
+// Will be an object of objects, where the keys of the main object are the generations (0-15) that are possible
+// (largest possible word is 16 letters), and the entries for each object are themselves objects with the 
+// key of those objects being each letter string produced so far for that generation and the entry being
+// an array of the dice numbers visited in order to produce that string.
+let visitTracker_obj = {};
 
-function calculateAnswers(){
-    let currRow = 0;
-    let currCol = 0;
-    let currEntry = "";
-    let genNum = 0;
-    // Start with each die in the 16 grid, and try to build words out from there.
-    for(let i = 0; i < 16; i++){
-        genNum = 0;
-        currRow = Math.floor(i / 4);
-        currCol = i - (4 * currRow);
-        currEntry = document.getElementById(currRow + "-" + currCol).innerHTML;
+function calculateAnswers(currRow, currCol){
+    let currEntry = document.getElementById(currRow + "-" + currCol).innerHTML;
+    // Reset the global object
+    visitTracker_obj = {};
+    for(let genNum = 0; genNum < 16; genNum++)
         // genNum == 0 for the first dice visited. Add the location and the first letter to the lists.
         if(genNum === 0){
-            locationsVisitedArray.push(i);
-            lettersVisitedArray.push(currEntry);
-            genNum += 1;
-            console.log("For i: " + i + " first letter is: " + currEntry);
+            visitTracker_obj[genNum] = [currEntry];
+            console.log("For genNum: " + genNum + " first letter is: " + currEntry);
         }
 
         // The max number of letters in a word is 16 if each letter is used (no letter can be used twice)
-        while(genNum < 16){
-            genNum += 1
+        //while(genNum < 16){
+        //    genNum += 1
 
-        }
+        //}
     }
 }
 
@@ -465,7 +457,12 @@ function showWordAnswers(){
         console.log("The two letter stems are: ");
         console.log(representedTwoLetterStems);
 
-        calculateAnswers();
+        // Start with each die in the 16 grid, and try to build words out from there.
+        for(let i = 0; i < 16; i++){
+            currRow = Math.floor(i / 4);
+            currCol = i - (4 * currRow);
+            console.log("calculateAnswers called.");
+            calculateAnswers(currRow, currCol);
 
     }
     
