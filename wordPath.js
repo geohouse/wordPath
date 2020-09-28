@@ -417,7 +417,7 @@ function calculateAnswers(currRow, currCol){
     let currEntry = document.getElementById(currRow + "-" + currCol).innerHTML;
     // Reset the global object
     visitTracker_obj = {};
-    for(let genNum = 0; genNum < 16; genNum++)
+    for(let genNum = 0; genNum < 16; genNum++){
         // genNum == 0 for the first dice visited. Add the location and the first letter to the lists.
         if(genNum === 0){
             visitTracker_obj[genNum] = [currEntry];
