@@ -434,7 +434,7 @@ function calculateAnswers(){
 
         // The max number of letters in a word is 16 if each letter is used (no letter can be used twice)
         while(genNum < 16){
-            console.log("in while.");
+            genNum += 1
 
         }
     }
