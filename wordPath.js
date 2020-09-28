@@ -437,7 +437,7 @@ function calculateAnswers(){
             console.log("in while.");
 
         }
-
+    }
 }
 
 
