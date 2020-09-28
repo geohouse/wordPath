@@ -407,8 +407,37 @@ function calculateTwoLetterStems(){
     }
 }
 
+// Will be an array of arrays with each array being the cell locations (1 -16 from top left to lower right)
+// that have been traversed for one possible word, and a different array for each word trial
+let locationsVisitedArray = [];
+// Same as the locationsVisitedArray except stores the letters themselves for checking instead.
+let lettersVisitedArray = [];
+
 function calculateAnswers(){
-    yield
+    let currRow = 0;
+    let currCol = 0;
+    let currEntry = "";
+    let genNum = 0;
+    // Start with each die in the 16 grid, and try to build words out from there.
+    for(let i = 0; i < 16; i++){
+        genNum = 0;
+        currRow = Math.floor(i / 4);
+        currCol = i - (4 * currRow);
+        currEntry = document.getElementById(currRow + "-" + currCol).innerHTML;
+        // genNum == 0 for the first dice visited. Add the location and the first letter to the lists.
+        if(genNum === 0){
+            locationsVisitedArray.push(i);
+            lettersVisitedArray.push(currEntry);
+            genNum += 1;
+            console.log("For i: " + i + " first letter is: " + currEntry);
+        }
+
+        // The max number of letters in a word is 16 if each letter is used (no letter can be used twice)
+        while(genNum < 16){
+            console.log("in while.");
+
+        }
+
 }
 
 
@@ -417,21 +446,26 @@ function showWordAnswers(){
     if(isToggled){
         console.log("Showing answers");
         console.log(letterArray);
+        // Provides object of arrays, with keys for each letter, and values for all words
+        // starting with that letter in the var splitByFirstLetter_obj
         splitArrayByFirstLetter();
 
 
-        let testOut1 = checkIfWordStartInList("aardvark");
-        console.log("testOut1 is: " + testOut1);
+        // let testOut1 = checkIfWordStartInList("aardvark");
+        // console.log("testOut1 is: " + testOut1);
 
-        let testOut2 = checkIfWordStartInList("cat");
-        console.log("testOut2 is: " + testOut2);
+        // let testOut2 = checkIfWordStartInList("cat");
+        // console.log("testOut2 is: " + testOut2);
 
-        let testOut3 = checkIfWordStartInList("axz");
-        console.log("testOut3 is: " + testOut3);
+        // let testOut3 = checkIfWordStartInList("axz");
+        // console.log("testOut3 is: " + testOut3);
 
         calculateTwoLetterStems();
+        // There are 365 2-letter stems represented from words (of 676 of the possible combos [26 * 26])
         console.log("The two letter stems are: ");
         console.log(representedTwoLetterStems);
+
+        calculateAnswers();
 
     }
     
