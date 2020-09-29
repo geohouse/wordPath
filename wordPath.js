@@ -527,7 +527,7 @@ function calculateAnswers(index, currRow, currCol){
                 // it to the visitTracker_obj, 
                 console.log("The last entry is: " + lastEntry + " the poss. letter is: " + possLetter + " and the combo is: " + lastEntry + possLetter);
                 if(representedTwoLetterStems.includes(lastEntry + possLetter)){
-                    visitTracker_obj[genNum][lastEntry + possLetter] = [lastIndex, possIndex];
+                    visitTracker_obj[genNum][lastEntry + possLetter].push(possIndex);
                     console.log("For gen: " + genNum + " adding entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
                 } else{
                     console.log("For gen: " + genNum + " SKIPPING entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
