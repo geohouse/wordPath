@@ -407,6 +407,74 @@ function calculateTwoLetterStems(){
     }
 }
 
+function convertRowColToIndex(row, col){
+    let index = undefined;
+    index = (row * 4) + col
+    return index;
+}
+
+function convertIndexToRowCol(index){
+    row = Math.floor(index / 4);
+    col = index - (4 * currRow);
+    return [row,col];
+}
+
+// Converts from index (0-15) to row/column, gets the possible moves given the index,
+// then converts those back to index values for return.
+
+// NEED TO INCLUDE A CHECKER TO MAKE SURE THE SAME INDEX ISN'T VISITED TWICE FOR EACH WORD POSSIBILITY
+function getPossibleMoves(index){
+    let possMoves = [];
+    let rowColConversion = convertIndexToRowCol(index);
+    let currRow = rowColConversion[0];
+    let currCol = rowColConversion[1];
+
+    // North-based checks
+    if(currRow > 0){
+        // Check North
+        possMoves.push(convertRowColToIndex(currRow -1, currCol));
+
+        // Check Northwest
+        if(currCol > 0){
+            possMoves.push(convertRowColToIndex(currRow - 1, currCol - 1));
+        }
+
+        // Check Northeast
+        if(currCol < 3){
+            possMoves.push(convertRowColToIndex(currRow - 1, currCol + 1));
+        }
+    }
+
+    // South-based checks
+    if(currRow < 3){
+        // Check South
+        possMoves.push(convertRowColToIndex(currRow +1, currCol));
+
+        // Check Southwest
+        if(currCol > 0){
+            possMoves.push(convertRowColToIndex(currRow + 1, currCol - 1));
+        }
+
+        // Check Southeast
+        if(currCol < 3){
+            possMoves.push(convertRowColToIndex(currRow + 1, currCol + 1));
+        }
+    }
+
+    // Check West
+    if(currCol > 0){
+        possMoves.push(convertRowColToIndex(currRow, currCol - 1));
+    }
+
+    // Check East
+    if(currCol < 3){
+        possMoves.push(convertRowColToIndex(currRow, currCol + 1));
+    }
+
+    return possMoves;
+
+}
+
 // Will be an object of objects, where the keys of the main object are the generations (0-15) that are possible
 // (largest possible word is 16 letters), and the entries for each object are themselves objects with the 
 // key of those objects being each letter string produced so far for that generation and the entry being
@@ -414,23 +482,57 @@ function calculateTwoLetterStems(){
 let visitTracker_obj = {};
 
 function calculateAnswers(index, currRow, currCol){
-    let currEntry = document.getElementById(currRow + "-" + currCol).innerHTML;
+    let currLetter = document.getElementById(currRow + "-" + currCol).innerHTML;
+    let lastIndex = undefined;
+    let lastEntry = "";
+    let possLetter = "";
+    let possIndex = undefined;
+    let possRow = undefined;
+    let possCol = undefined;
+    let possibleMoves = undefined;
     // Reset the global object
     visitTracker_obj = {};
     for(let genNum = 0; genNum < 16; genNum++){
-        // genNum == 0 for the first dice visited. Add the location and the first letter to the lists.
+        // Initialize the tracker object with e.g. visitTracker_obj[0] = {'H':2} if the third die has 'H'
         if(genNum === 0){
             visitTracker_obj[genNum] = {};
-            visitTracker_obj[genNum][currEntry] = index;
-            console.log("For genNum: " + genNum + " first letter is: " + currEntry);
+            // in example above, genNum = 0, currLetter = 'H', index = 2
+            visitTracker_obj[genNum][currLetter] = [index];
+            console.log("For genNum: " + genNum + " first letter is: " + currLetter);
             console.log(visitTracker_obj);
+            lastEntry = currLetter;
         }
 
-        // The max number of letters in a word is 16 if each letter is used (no letter can be used twice)
-        //while(genNum < 16){
-        //    genNum += 1
+        if(genNum === 1){
+            visitTracker_obj[genNum] = {};
+            lastIndex = visitTracker_obj[genNum - 1][lastEntry];
+            possibleMoves = getPossibleMoves(lastIndex);
+            
+            // Loop through the array of possible moves. 
+            // The elements of the array are the index values of the possible moves.
+            // Use the index to get the corresponding row/col and look up the letter 
+            // on the die at that position
+            for(let i = 0; i < possibleMoves.length; i++){
+                possIndex = possibleMoves[i];
+                let rowColConversion = convertIndexToRowCol(possIndex);
+                possRow = rowColConversion[0];
+                possCol = rowColConversion[1];
+                // Get the letter represented by the current possible move
+                possLetter = document.getElementById(possRow + "-" + possCol).innerHTML;
+                // If the first letter and the letter represented by the possible move
+                // represent a two-letter start combo that's in the word list, then add
+                // it to the visitTracker_obj, 
+                if(representedTwoLetterStems.includes(lastEntry + possLetter)){
+                    visitTracker_obj[genNum][lastEntry + possLetter] = [lastIndex, possIndex];
+                    console.log("For gen: " + genNum + " adding entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
+                } else{
+                    continue;
+                }
+            }
 
-        //}
+        }
+        console.log(visitTracker_obj);
+
     }
 }
 
