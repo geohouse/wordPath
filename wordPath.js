@@ -416,7 +416,7 @@ function convertRowColToIndex(row, col){
 
 function convertIndexToRowCol(index){
     row = Math.floor(index / 4);
-    col = index - (4 * currRow);
+    col = index - (4 * row);
     return [row,col];
 }
 
