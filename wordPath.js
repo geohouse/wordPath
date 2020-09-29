@@ -463,6 +463,7 @@ function showWordAnswers(){
             currCol = i - (4 * currRow);
             console.log("calculateAnswers called.");
             calculateAnswers(currRow, currCol);
+        }
 
     }
     
