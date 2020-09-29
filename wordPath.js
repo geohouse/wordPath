@@ -388,7 +388,6 @@ let isToggled = false;
 
 
 // Make a list of all the 2-letter stems that ARE represented in the splitByFirstLetter_obj
-// NEED TO MAKE WORK WITH 'Qu'
 let representedTwoLetterStems = [];
 function calculateTwoLetterStems(){
     let currLetterList = [];
@@ -398,7 +397,13 @@ function calculateTwoLetterStems(){
         currLetter = String.fromCharCode(96 + i); // where n is 0, 1, 2 ...
         currLetterList = splitByFirstLetter_obj[currLetter];
         for(let j = 0; j < currLetterList.length; j++){
-            currTwoLetterEntry = currLetterList[j].slice(0,2);
+            // Retain 3 letters if word starts with 'q' because 'qu' is a single die entry,
+            // else just retain the normal 2.
+            if(currLetterList[j][0] === "q"){
+                currTwoLetterEntry = currLetterList[j].slice(0,3);
+            } else{
+                currTwoLetterEntry = currLetterList[j].slice(0,2);
+            }
             if(representedTwoLetterStems.includes(currTwoLetterEntry)){
                 continue;
             } else{
