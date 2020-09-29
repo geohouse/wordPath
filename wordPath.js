@@ -413,15 +413,17 @@ function calculateTwoLetterStems(){
 // an array of the dice numbers visited in order to produce that string.
 let visitTracker_obj = {};
 
-function calculateAnswers(currRow, currCol){
+function calculateAnswers(index, currRow, currCol){
     let currEntry = document.getElementById(currRow + "-" + currCol).innerHTML;
     // Reset the global object
     visitTracker_obj = {};
     for(let genNum = 0; genNum < 16; genNum++){
         // genNum == 0 for the first dice visited. Add the location and the first letter to the lists.
         if(genNum === 0){
-            visitTracker_obj[genNum] = [currEntry];
+            visitTracker_obj[genNum] = {};
+            visitTracker_obj[genNum][currEntry] = index;
             console.log("For genNum: " + genNum + " first letter is: " + currEntry);
+            console.log(visitTracker_obj);
         }
 
         // The max number of letters in a word is 16 if each letter is used (no letter can be used twice)
@@ -462,7 +464,7 @@ function showWordAnswers(){
             currRow = Math.floor(i / 4);
             currCol = i - (4 * currRow);
             console.log("calculateAnswers called.");
-            calculateAnswers(currRow, currCol);
+            calculateAnswers(i, currRow, currCol);
         }
 
     }
