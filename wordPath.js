@@ -530,7 +530,7 @@ function calculateAnswers(index, currRow, currCol){
                     visitTracker_obj[genNum][lastEntry + possLetter] = [lastIndex, possIndex];
                     console.log("For gen: " + genNum + " adding entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
                 } else{
-                    console.log("For gen: " + genNum + " SKIPPING entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);")
+                    console.log("For gen: " + genNum + " SKIPPING entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
                     continue;
                 }
             }
