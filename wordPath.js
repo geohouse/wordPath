@@ -484,7 +484,7 @@ function getPossibleMoves(index){
 let visitTracker_obj = {};
 
 function calculateAnswers(index, currRow, currCol){
-    let currLetter = document.getElementById(currRow + "-" + currCol).innerHTML;
+    let currLetter = document.getElementById(currRow + "-" + currCol).innerHTML.toLowerCase();
     let lastIndex = undefined;
     let lastEntry = "";
     let possLetter = "";
@@ -521,7 +521,7 @@ function calculateAnswers(index, currRow, currCol){
                 possCol = rowColConversion[1];
                 console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
                 // Get the letter represented by the current possible move
-                possLetter = document.getElementById(possRow + "-" + possCol).innerHTML;
+                possLetter = document.getElementById(possRow + "-" + possCol).innerHTML.toLowerCase();
                 // If the first letter and the letter represented by the possible move
                 // represent a two-letter start combo that's in the word list, then add
                 // it to the visitTracker_obj, 
@@ -530,6 +530,7 @@ function calculateAnswers(index, currRow, currCol){
                     visitTracker_obj[genNum][lastEntry + possLetter] = [lastIndex, possIndex];
                     console.log("For gen: " + genNum + " adding entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
                 } else{
+                    console.log("For gen: " + genNum + " SKIPPING entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);")
                     continue;
                 }
             }
