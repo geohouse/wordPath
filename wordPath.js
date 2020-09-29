@@ -410,6 +410,7 @@ function calculateTwoLetterStems(){
 function convertRowColToIndex(row, col){
     let index = undefined;
     index = (row * 4) + col
+    console.log("In convertRowColToIndex. Conversion from row: " + row + " col: " + col + " to index: " + index);
     return index;
 }
 
@@ -426,9 +427,10 @@ function convertIndexToRowCol(index){
 function getPossibleMoves(index){
     let possMoves = [];
     let rowColConversion = convertIndexToRowCol(index);
+    
     let currRow = rowColConversion[0];
     let currCol = rowColConversion[1];
-
+    console.log("In get poss. moves, the conversion from index: " + index + "is row: " + currRow + " col: " + currCol);
     // North-based checks
     if(currRow > 0){
         // Check North
@@ -507,7 +509,7 @@ function calculateAnswers(index, currRow, currCol){
             visitTracker_obj[genNum] = {};
             lastIndex = visitTracker_obj[genNum - 1][lastEntry];
             possibleMoves = getPossibleMoves(lastIndex);
-            
+            console.log("The possible moves are: " + possibleMoves);
             // Loop through the array of possible moves. 
             // The elements of the array are the index values of the possible moves.
             // Use the index to get the corresponding row/col and look up the letter 
