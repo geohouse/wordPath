@@ -388,6 +388,7 @@ let isToggled = false;
 
 
 // Make a list of all the 2-letter stems that ARE represented in the splitByFirstLetter_obj
+// NEED TO MAKE WORK WITH 'Qu'
 let representedTwoLetterStems = [];
 function calculateTwoLetterStems(){
     let currLetterList = [];
