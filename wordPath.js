@@ -430,7 +430,7 @@ function getPossibleMoves(index){
     
     let currRow = rowColConversion[0];
     let currCol = rowColConversion[1];
-    console.log("In get poss. moves, the conversion from index: " + index + "is row: " + currRow + " col: " + currCol);
+    console.log("In get poss. moves, the conversion from index: " + index + " is row: " + currRow + " col: " + currCol);
     // North-based checks
     if(currRow > 0){
         // Check North
@@ -509,7 +509,7 @@ function calculateAnswers(index, currRow, currCol){
             visitTracker_obj[genNum] = {};
             lastIndex = visitTracker_obj[genNum - 1][lastEntry];
             possibleMoves = getPossibleMoves(lastIndex);
-            console.log("The possible moves are: " + possibleMoves);
+            console.log("For genNum: " + genNum + " The possible moves are: " + possibleMoves);
             // Loop through the array of possible moves. 
             // The elements of the array are the index values of the possible moves.
             // Use the index to get the corresponding row/col and look up the letter 
@@ -519,6 +519,7 @@ function calculateAnswers(index, currRow, currCol){
                 let rowColConversion = convertIndexToRowCol(possIndex);
                 possRow = rowColConversion[0];
                 possCol = rowColConversion[1];
+                console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
                 // Get the letter represented by the current possible move
                 possLetter = document.getElementById(possRow + "-" + possCol).innerHTML;
                 // If the first letter and the letter represented by the possible move
