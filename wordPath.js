@@ -525,6 +525,7 @@ function calculateAnswers(index, currRow, currCol){
                 // If the first letter and the letter represented by the possible move
                 // represent a two-letter start combo that's in the word list, then add
                 // it to the visitTracker_obj, 
+                console.log("The last entry is: " + lastEntry + " the poss. letter is: " + possLetter + " and the combo is: " + lastEntry + possLetter);
                 if(representedTwoLetterStems.includes(lastEntry + possLetter)){
                     visitTracker_obj[genNum][lastEntry + possLetter] = [lastIndex, possIndex];
                     console.log("For gen: " + genNum + " adding entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
