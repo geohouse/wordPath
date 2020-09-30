@@ -577,7 +577,8 @@ function calculateAnswers(index, currRow, currCol){
 
         } else if(genNum > 1){
             prevGenObject = visitTracker_obj[genNum - 1];
-            console.log("genNum - 1 is: " + genNum - 1);
+            console.log("visitTracker_obj keys are: " + Object.keys(visitTracker_obj));
+            console.log("last genNum is: " + genNum - 1);
             console.log("prevGenObject is: " + prevGenObject);
             prevGenKeys = Object.keys(prevGenObject);
             console.log("For genNum: " + genNum + " the keys are: " + prevGenKeys);
