@@ -517,7 +517,7 @@ function getPossibleMoves(prevMoveList){
 // key of those objects being each letter string produced so far for that generation and the entry being
 // an array of the dice numbers visited in order to produce that string.
 let visitTracker_obj = {};
-
+let completedWordObject = {};
 function calculateAnswers(index, currRow, currCol){
     let currLetter = document.getElementById(currRow + "-" + currCol).innerHTML.toLowerCase();
     // Will hold the object representing the word stems and traversal paths going into the 
@@ -536,7 +536,7 @@ function calculateAnswers(index, currRow, currCol){
     let possibleMoves = undefined;
     let possWordReturnCode = 0;
     let nextPath = [];
-    let completedWordObject = {};
+    
     // Reset the global object
     visitTracker_obj = {};
     for(let genNum = 0; genNum < 16; genNum++){
