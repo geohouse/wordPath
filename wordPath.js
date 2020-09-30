@@ -531,7 +531,11 @@ function calculateAnswers(index, currRow, currCol){
     let possIndex = undefined;
     let possRow = undefined;
     let possCol = undefined;
+    let rowColConversion = undefined;
+    let possWord = "";
     let possibleMoves = undefined;
+    let possWordReturnCode = 0;
+    let nextPath = [];
     let completedWordObject = {};
     // Reset the global object
     visitTracker_obj = {};
@@ -558,7 +562,7 @@ function calculateAnswers(index, currRow, currCol){
             // on the die at that position
             for(let i = 0; i < possibleMoves.length; i++){
                 possIndex = possibleMoves[i];
-                let rowColConversion = convertIndexToRowCol(possIndex);
+                rowColConversion = convertIndexToRowCol(possIndex);
                 possRow = rowColConversion[0];
                 possCol = rowColConversion[1];
                 console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
@@ -579,6 +583,7 @@ function calculateAnswers(index, currRow, currCol){
             }
 
         } else if(genNum > 1){
+            visitTracker_obj[genNum] = {};
             console.log("Testing.");
             console.log("the genNum is: " + genNum);
             console.log(" the prev. gen num is: " + (genNum - 1));
@@ -586,6 +591,7 @@ function calculateAnswers(index, currRow, currCol){
             console.log("visitTracker_obj keys are: " + Object.keys(visitTracker_obj));
             console.log("last genNum is: " + (genNum - 1));
             console.log("prevGenObject is: " + prevGenObject);
+            // These are the strings generated from the previous generation
             prevGenKeys = Object.keys(prevGenObject);
             console.log("For genNum: " + genNum + " the keys are: " + prevGenKeys);
             for(let i = 0; i < prevGenKeys.length; i++){
@@ -596,6 +602,43 @@ function calculateAnswers(index, currRow, currCol){
                 possibleMoves = getPossibleMoves(prevPath);
                 console.log("In for. The lastEntry is: " + lastEntry + " the prevPath is: " + prevPath);
                 console.log("The possible moves are: " + possibleMoves);
+
+                // For each of the possible moves, see whether it provides a finished word or not.
+                for(let i = 0; i < possibleMoves.length; i++){
+                    possIndex = possibleMoves[i];
+                    rowColConversion = convertIndexToRowCol(possIndex);
+                    possRow = rowColConversion[0];
+                    possCol = rowColConversion[1];
+                    console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
+                    // Get the letter represented by the current possible move
+                    possLetter = document.getElementById(possRow + "-" + possCol).innerHTML.toLowerCase();
+                    possWord = lastEntry + possLetter;
+                    //possWordReturnCode acts as 3-level boolean with 
+                    // 0 = wordStart not in the list (stop this direction of searching by not including the 
+                    // word and its path in the visitTracker_obj object for the current genNum),
+                    // 1 = wordStart in the list as a subset of a longer word (so keep the search going by
+                    // adding the word and its path to the visitTracker_obj object for the current genNum)
+                    // 2 = wordStart is a word in the list, and should be counted as another word found,
+                    // and the word and its path are added to the completedWordObj as well as the visitTracker_obj
+                    // in case the current complete word is also part of a longer word to be found as well.
+
+                    possWordReturnCode = checkIfWordStartInList(possWord);
+
+                    if(possWordReturnCode == 0){
+                        continue;
+                    }
+
+                    if(possWordReturnCode == 1){
+                        nextPath = prevPath.push(possIndex);
+                        visitTracker_obj[genNum][possWord] = nextPath;
+                    }
+
+                    if(possWordReturnCode == 2){
+                        nextPath = prevPath.push(possIndex);
+                        completedWordObject[possWord] = nextPath;
+                        visitTracker_obj[genNum][possWord] = nextPath;
+                    }
+                    
             }
         }
 
