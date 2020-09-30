@@ -629,11 +629,13 @@ function calculateAnswers(index, currRow, currCol){
                     }
 
                     if(possWordReturnCode == 1){
+                        console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
                         nextPath = prevPath.push(possIndex);
                         visitTracker_obj[genNum][possWord] = nextPath;
                     }
 
                     if(possWordReturnCode == 2){
+                        console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
                         nextPath = prevPath.push(possIndex);
                         completedWordObject[possWord] = nextPath;
                         visitTracker_obj[genNum][possWord] = nextPath;
@@ -651,6 +653,7 @@ function calculateAnswers(index, currRow, currCol){
 function showWordAnswers(){
     isToggled = toggle.checked;
     if(isToggled){
+        let completedWordObject = {};
         console.log("Showing answers");
         console.log(letterArray);
         // Provides object of arrays, with keys for each letter, and values for all words
