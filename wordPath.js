@@ -413,6 +413,67 @@ function calculateTwoLetterStems(){
     }
 }
 
+let splitByFirstLetter_obj = {};
+let listLengthEachLetter = {};
+function splitArrayByFirstLetter(){
+    let currLetter = "";
+    let nextLetter = "";
+    let currLetterStartIndex = 0;
+    let nextLetterStartIndex = 0;
+    for(i=1; i<27; i++){
+
+        // From https://stackoverflow.com/questions/3145030/convert-integer-into-its-character-equivalent-where-0-a-1-b-etc/3145054#3145054
+        currLetter = String.fromCharCode(96 + i); // where n is 0, 1, 2 ...
+        currLetterStartIndex = getArrayIndex(currLetter);
+        console.log("The curr letter is: " + currLetter + " with list index: " + currLetterStartIndex);
+        // Only look for the next letter if this is at most the second to the last letter in the alphabet.  
+        if(i<26){
+            nextLetter = String.fromCharCode(96 + i + 1); // where n is 0, 1, 2 ...
+            nextLetterStartIndex = getArrayIndex(nextLetter);
+            console.log("The next letter is: " + nextLetter + " with list index: " + nextLetterStartIndex);
+        } else{
+            nextLetterStartIndex = letterArray.length - 1;
+        }
+
+        // Need to use [] when using a var to provide the name for the key in an object.
+        // Here assigning in (shallow) copied entries of the original list that start with 
+        // each letter of the alphabet
+        splitByFirstLetter_obj[currLetter] = letterArray.slice(currLetterStartIndex, nextLetterStartIndex);
+        listLengthEachLetter[currLetter] = nextLetterStartIndex - currLetterStartIndex; 
+    }
+}
+
+function checkIfWordStartInList(wordStart){
+    // Will act as 3-level boolean with 
+    // 0 = wordStart not in the list (stop this direction of searching),
+    // 1 = wordStart in the list as a subset of a longer word (so keep the search going)
+    // 2 = wordStart is a word in the list, and should be counted as another word found (and keep search going)
+    let wordStartInList = 0;
+    let firstLetter = wordStart[0];
+    let wordStartLength = wordStart.length;
+    let currLetterWordList = splitByFirstLetter_obj[firstLetter];
+    let currWordFromList = "";
+    for(let i = 0; i < currLetterWordList.length; i++){
+        currWordFromList = currLetterWordList[i];
+        if(currWordFromList === wordStart){
+            console.log("Word match found for word: " + wordStart);
+            wordStartInList = 2;
+            return wordStartInList;
+        }else if(currWordFromList.length < wordStartLength){
+            continue;
+        } else{
+            if(currWordFromList.slice(0,wordStartLength) === wordStart){
+                // Set to 1 but don't return, because this may be a full word as well as the stem of another
+                // (search path will continue in both cases)
+                wordStartInList = 1
+            }
+        }
+    }
+    return wordStartInList;
+}
+
+
+
 function convertRowColToIndex(row, col){
     let index = undefined;
     index = (row * 4) + col
@@ -430,53 +491,77 @@ function convertIndexToRowCol(index){
 // then converts those back to index values for return.
 
 // NEED TO INCLUDE A CHECKER TO MAKE SURE THE SAME INDEX ISN'T VISITED TWICE FOR EACH WORD POSSIBILITY
-function getPossibleMoves(index){
+function getPossibleMoves(inputIndex, prevMoveList){
     let possMoves = [];
-    let rowColConversion = convertIndexToRowCol(index);
-    
+    let rowColConversion = convertIndexToRowCol(inputIndex);
+    let possIndex = undefined;
     let currRow = rowColConversion[0];
     let currCol = rowColConversion[1];
-    console.log("In get poss. moves, the conversion from index: " + index + " is row: " + currRow + " col: " + currCol);
+    console.log("In get poss. moves, the conversion from index: " + inputIndex + " is row: " + currRow + " col: " + currCol);
     // North-based checks
     if(currRow > 0){
         // Check North
-        possMoves.push(convertRowColToIndex(currRow -1, currCol));
+        possIndex = convertRowColToIndex(currRow -1, currCol);
+        if(!prevMoveList.includes(possIndex)){
+            possMoves.push(possIndex);
+        }
+        
 
         // Check Northwest
         if(currCol > 0){
-            possMoves.push(convertRowColToIndex(currRow - 1, currCol - 1));
+            possIndex = convertRowColToIndex(currRow - 1, currCol - 1);
+            if(!prevMoveList.includes(possIndex)){
+                possMoves.push(possIndex);
+            }
         }
 
         // Check Northeast
         if(currCol < 3){
-            possMoves.push(convertRowColToIndex(currRow - 1, currCol + 1));
+            possIndex = convertRowColToIndex(currRow - 1, currCol + 1);
+            if(!prevMoveList.includes(possIndex)){
+                possMoves.push(possIndex);
+            }
         }
     }
 
     // South-based checks
     if(currRow < 3){
         // Check South
-        possMoves.push(convertRowColToIndex(currRow +1, currCol));
-
+        possIndex = convertRowColToIndex(currRow +1, currCol);
+        if(!prevMoveList.includes(possIndex)){
+            possMoves.push(possIndex);
+        }
         // Check Southwest
         if(currCol > 0){
-            possMoves.push(convertRowColToIndex(currRow + 1, currCol - 1));
+            possIndex = convertRowColToIndex(currRow + 1, currCol - 1);
+            if(!prevMoveList.includes(possIndex)){
+                possMoves.push(possIndex);
+            }
         }
 
         // Check Southeast
         if(currCol < 3){
-            possMoves.push(convertRowColToIndex(currRow + 1, currCol + 1));
+            possIndex = convertRowColToIndex(currRow + 1, currCol + 1)
+            if(!prevMoveList.includes(possIndex)){
+                possMoves.push(possIndex);
+            }
         }
     }
 
     // Check West
     if(currCol > 0){
-        possMoves.push(convertRowColToIndex(currRow, currCol - 1));
+        possIndex = convertRowColToIndex(currRow, currCol - 1);
+        if(!prevMoveList.includes(possIndex)){
+            possMoves.push(possIndex);
+        }
     }
 
     // Check East
     if(currCol < 3){
-        possMoves.push(convertRowColToIndex(currRow, currCol + 1));
+        possIndex = convertRowColToIndex(currRow, currCol + 1);
+        if(!prevMoveList.includes(possIndex)){
+            possMoves.push(possIndex);
+        }
     }
 
     return possMoves;
@@ -491,6 +576,11 @@ let visitTracker_obj = {};
 
 function calculateAnswers(index, currRow, currCol){
     let currLetter = document.getElementById(currRow + "-" + currCol).innerHTML.toLowerCase();
+    // Will hold the object representing the word stems and traversal paths going into the 
+    // current genNum
+    let prevGenObject = {};
+    let prevGenKeys = [];
+    let prevPath = [];
     let lastIndex = undefined;
     let lastEntry = "";
     let possLetter = "";
@@ -498,6 +588,7 @@ function calculateAnswers(index, currRow, currCol){
     let possRow = undefined;
     let possCol = undefined;
     let possibleMoves = undefined;
+    let completedWordObject = {};
     // Reset the global object
     visitTracker_obj = {};
     for(let genNum = 0; genNum < 16; genNum++){
@@ -514,7 +605,9 @@ function calculateAnswers(index, currRow, currCol){
         if(genNum === 1){
             visitTracker_obj[genNum] = {};
             lastIndex = visitTracker_obj[genNum - 1][lastEntry];
-            possibleMoves = getPossibleMoves(lastIndex);
+            // The lastIndex here is also the prevMoveList to the getPossibleMoves function.
+            // This is an edge case
+            possibleMoves = getPossibleMoves(lastIndex, lastIndex);
             console.log("For genNum: " + genNum + " The possible moves are: " + possibleMoves);
             // Loop through the array of possible moves. 
             // The elements of the array are the index values of the possible moves.
@@ -542,7 +635,15 @@ function calculateAnswers(index, currRow, currCol){
                 }
             }
 
+        } else{
+            prevGenObject = visitTracker_obj[genNum - 1];
+            prevGenKeys = Object.keys(prevGenObject);
+            console.log("For genNum: " + genNum + " the keys are: " + prevGenKeys);
+            for(let i = 0; i < prevGenKeys.length; i++){
+
+            }
         }
+
         console.log(visitTracker_obj);
 
     }
