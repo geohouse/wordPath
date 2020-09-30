@@ -579,7 +579,7 @@ function calculateAnswers(index, currRow, currCol){
             console.log("Testing.");
             console.log("the genNum is: " + genNum);
             console.log(" the prev. gen num is: " + (genNum - 1));
-            prevGenObject = visitTracker_obj[genNum - 1];
+            prevGenObject = visitTracker_obj[(genNum - 1)];
             console.log("visitTracker_obj keys are: " + Object.keys(visitTracker_obj));
             console.log("last genNum is: " + (genNum - 1));
             console.log("prevGenObject is: " + prevGenObject);
