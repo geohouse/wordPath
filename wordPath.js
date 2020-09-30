@@ -575,8 +575,10 @@ function calculateAnswers(index, currRow, currCol){
                 }
             }
 
-        } else{
+        } else if(genNum > 1){
             prevGenObject = visitTracker_obj[genNum - 1];
+            console.log("genNum - 1 is: " + genNum - 1);
+            console.log("prevGenObject is: " + prevGenObject);
             prevGenKeys = Object.keys(prevGenObject);
             console.log("For genNum: " + genNum + " the keys are: " + prevGenKeys);
             for(let i = 0; i < prevGenKeys.length; i++){
