@@ -544,9 +544,10 @@ function calculateAnswers(index, currRow, currCol){
         } else if(genNum === 1){
             visitTracker_obj[genNum] = {};
             lastIndex = visitTracker_obj[genNum - 1][lastEntry];
-            // The lastIndex here is also the prevMoveList to the getPossibleMoves function.
+            // The lastIndex here is also the prevMoveList to the getPossibleMoves function, 
+            // but needs to be in list form.
             // This is an edge case
-            possibleMoves = getPossibleMoves(lastIndex, lastIndex);
+            possibleMoves = getPossibleMoves(lastIndex, [lastIndex]);
             console.log("For genNum: " + genNum + " The possible moves are: " + possibleMoves);
             // Loop through the array of possible moves. 
             // The elements of the array are the index values of the possible moves.
