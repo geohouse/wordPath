@@ -599,7 +599,7 @@ function calculateAnswers(index, currRow, currCol){
                 lastEntry = prevGenKeys[i];
                 // This is the path to get to the string
                 prevPath = prevGenObject[lastEntry];
-                possibleMoves = getPossibleMoves(prevPath);
+                possibleMoves = getPossibleMoves([prevPath]);
                 console.log("In for. The lastEntry is: " + lastEntry + " the prevPath is: " + prevPath);
                 console.log("The possible moves are: " + possibleMoves);
 
