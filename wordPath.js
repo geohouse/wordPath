@@ -430,15 +430,18 @@ function convertIndexToRowCol(index){
 // Converts from index (0-15) to row/column, gets the possible moves given the index,
 // then converts those back to index values for return.
 
-// NEED TO INCLUDE A CHECKER TO MAKE SURE THE SAME INDEX ISN'T VISITED TWICE FOR EACH WORD POSSIBILITY
-function getPossibleMoves(inputIndex, prevMoveList){
+// Given a list of the previous moves (index values visited previously)
+// this finds the last move, and checks for possible moves based on it
+// (making sure the same index isn't visited twice)
+function getPossibleMoves(prevMoveList){
     console.log("In get poss. moves, the prev move list is: " + prevMoveList);
+    let lastMove = prevMoveList[prevMoveList.length - 1];
     let possMoves = [];
-    let rowColConversion = convertIndexToRowCol(inputIndex);
+    let rowColConversion = convertIndexToRowCol(lastMove);
     let possIndex = undefined;
     let currRow = rowColConversion[0];
     let currCol = rowColConversion[1];
-    console.log("In get poss. moves, the conversion from index: " + inputIndex + " is row: " + currRow + " col: " + currCol);
+    console.log("In get poss. moves, the conversion from index: " + lastMove + " is row: " + currRow + " col: " + currCol);
     // North-based checks
     if(currRow > 0){
         // Check North
@@ -544,10 +547,10 @@ function calculateAnswers(index, currRow, currCol){
         } else if(genNum === 1){
             visitTracker_obj[genNum] = {};
             lastIndex = visitTracker_obj[genNum - 1][lastEntry];
-            // The lastIndex here is also the prevMoveList to the getPossibleMoves function, 
-            // but needs to be in list form.
+            // The lastIndex here forms the prevMoveList to the getPossibleMoves function, 
+            // and needs to be in list form.
             // This is an edge case
-            possibleMoves = getPossibleMoves(lastIndex, [lastIndex]);
+            possibleMoves = getPossibleMoves([lastIndex]);
             console.log("For genNum: " + genNum + " The possible moves are: " + possibleMoves);
             // Loop through the array of possible moves. 
             // The elements of the array are the index values of the possible moves.
@@ -586,7 +589,13 @@ function calculateAnswers(index, currRow, currCol){
             prevGenKeys = Object.keys(prevGenObject);
             console.log("For genNum: " + genNum + " the keys are: " + prevGenKeys);
             for(let i = 0; i < prevGenKeys.length; i++){
-
+                // This is the string
+                lastEntry = prevGenKeys[i];
+                // This is the path to get to the string
+                lastIndex = prevGenObject[lastEntry];
+                possibleMoves = getPossibleMoves(prevMoveList);
+                console.log("In for. The lastEntry is: " + lastEntry + " the last index is: " + lastIndex);
+                console.log("The possible moves are: " + possibleMoves);
             }
         }
 
