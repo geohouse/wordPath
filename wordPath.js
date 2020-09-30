@@ -540,9 +540,7 @@ function calculateAnswers(index, currRow, currCol){
             console.log("For genNum: " + genNum + " first letter is: " + currLetter);
             console.log(visitTracker_obj);
             lastEntry = currLetter;
-        }
-
-        if(genNum === 1){
+        } else if(genNum === 1){
             visitTracker_obj[genNum] = {};
             lastIndex = visitTracker_obj[genNum - 1][lastEntry];
             // The lastIndex here is also the prevMoveList to the getPossibleMoves function.
