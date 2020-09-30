@@ -432,6 +432,7 @@ function convertIndexToRowCol(index){
 
 // NEED TO INCLUDE A CHECKER TO MAKE SURE THE SAME INDEX ISN'T VISITED TWICE FOR EACH WORD POSSIBILITY
 function getPossibleMoves(inputIndex, prevMoveList){
+    console.log("In get poss. moves, the prev move list is: " + prevMoveList);
     let possMoves = [];
     let rowColConversion = convertIndexToRowCol(inputIndex);
     let possIndex = undefined;
