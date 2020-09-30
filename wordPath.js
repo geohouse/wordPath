@@ -638,7 +638,7 @@ function calculateAnswers(index, currRow, currCol){
                         completedWordObject[possWord] = nextPath;
                         visitTracker_obj[genNum][possWord] = nextPath;
                     }
-                    
+                }  
             }
         }
 
