@@ -671,6 +671,17 @@ function calculateAnswers(index, currRow, currCol){
     }
 }
 
+// Due to the tracking of multiple potential paths for each word,
+// when indexing into completedWordObject, need to provide 2 indices (works regardless of 
+// whether the current word has multiple paths or only 1 path) e.g.
+// 1 path
+// completedWordObject['list'][0][0]
+// returns Array(4) [ 8, 9, 10, 5 ]
+// 2 paths
+// completedWordObject['sea'][0][0]
+// returns Array(3) [ 10, 14, 15 ]
+//completedWordObject['sea'][0][0]
+// returns Array(3) [ 13, 14, 15 ]
 
 function showWordAnswers(){
     isToggled = toggle.checked;
