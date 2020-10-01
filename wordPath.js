@@ -434,7 +434,7 @@ function convertIndexToRowCol(index){
 // this finds the last move, and checks for possible moves based on it
 // (making sure the same index isn't visited twice)
 function getPossibleMoves(prevMoveList){
-    console.log("In get poss. moves, the prev move list is: " + prevMoveList);
+    //console.log("In get poss. moves, the prev move list is: " + prevMoveList);
     // This works correctly regardless of whether the prevMoveList has a single entry (in which case this 
     // selects that) or multiple entries (in which case it selects the last one)
     let lastMove = prevMoveList[prevMoveList.length - 1];
@@ -443,7 +443,7 @@ function getPossibleMoves(prevMoveList){
     let possIndex = undefined;
     let currRow = rowColConversion[0];
     let currCol = rowColConversion[1];
-    console.log("In get poss. moves, the conversion from index: " + lastMove + " is row: " + currRow + " col: " + currCol);
+    //console.log("In get poss. moves, the conversion from index: " + lastMove + " is row: " + currRow + " col: " + currCol);
     // North-based checks
     if(currRow > 0){
         // Check North
@@ -586,9 +586,8 @@ function calculateAnswers(index, currRow, currCol){
 
         } else if(genNum > 1){
             visitTracker_obj[genNum] = {};
-            console.log("Testing.");
             console.log("the genNum is: " + genNum);
-            console.log(" the prev. gen num is: " + (genNum - 1));
+            //console.log(" the prev. gen num is: " + (genNum - 1));
             prevGenObject = visitTracker_obj[(genNum - 1)];
             console.log("visitTracker_obj keys are: " + Object.keys(visitTracker_obj));
             console.log("last genNum is: " + (genNum - 1));
@@ -606,7 +605,7 @@ function calculateAnswers(index, currRow, currCol){
                 console.log
                 possibleMoves = getPossibleMoves(prevPath);
                 console.log("In for. The lastEntry is: " + lastEntry + " the prevPath is: " + prevPath);
-                console.log("Is the prevPath an array? " + Array.isArray(prevPath));
+                //console.log("Is the prevPath an array? " + Array.isArray(prevPath));
                 console.log("The possible moves are: " + possibleMoves);
 
                 // For each of the possible moves, see whether it provides a finished word or not.
@@ -615,7 +614,7 @@ function calculateAnswers(index, currRow, currCol){
                     rowColConversion = convertIndexToRowCol(possIndex);
                     possRow = rowColConversion[0];
                     possCol = rowColConversion[1];
-                    console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
+                    //console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
                     // Get the letter represented by the current possible move
                     possLetter = document.getElementById(possRow + "-" + possCol).innerHTML.toLowerCase();
                     possWord = lastEntry + possLetter;
@@ -655,7 +654,8 @@ function calculateAnswers(index, currRow, currCol){
                         // If this word was already found, then add the new path found to make the
                         // word to the previous path(s)
                         if(Object.keys(completedWordObject).includes(possWord)){
-                            completedWordObject[possWord].push(nextPath);
+                            // push as an array
+                            completedWordObject[possWord].push([nextPath]);
                         } else{
                             completedWordObject[possWord] = nextPath;
                         }
