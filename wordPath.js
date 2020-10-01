@@ -594,13 +594,17 @@ function calculateAnswers(index, currRow, currCol){
             // These are the strings generated from the previous generation
             prevGenKeys = Object.keys(prevGenObject);
             console.log("For genNum: " + genNum + " the keys are: " + prevGenKeys);
+            console.log("And the values are: " + Object.values(prevGenObject));
             for(let i = 0; i < prevGenKeys.length; i++){
                 // This is the string
                 lastEntry = prevGenKeys[i];
                 // This is the path to get to the string
                 prevPath = prevGenObject[lastEntry];
-                possibleMoves = getPossibleMoves([prevPath]);
+                // HERE DEBUG
+                console.log
+                possibleMoves = getPossibleMoves(prevPath);
                 console.log("In for. The lastEntry is: " + lastEntry + " the prevPath is: " + prevPath);
+                console.log("Is the prevPath an array? " + Array.isArray(prevPath));
                 console.log("The possible moves are: " + possibleMoves);
 
                 // For each of the possible moves, see whether it provides a finished word or not.
