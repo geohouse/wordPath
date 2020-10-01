@@ -657,7 +657,8 @@ function calculateAnswers(index, currRow, currCol){
                             // push as an array
                             completedWordObject[possWord].push([nextPath]);
                         } else{
-                            completedWordObject[possWord] = [nextPath];
+                            completedWordObject[possWord] = [];
+                            completedWordObject[possWord].push([nextPath]);
                         }
                         visitTracker_obj[genNum][possWord] = nextPath;
                     }
