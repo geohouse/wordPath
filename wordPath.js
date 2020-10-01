@@ -655,10 +655,7 @@ function calculateAnswers(index, currRow, currCol){
                         // If this word was already found, then add the new path found to make the
                         // word to the previous path(s)
                         if(Object.keys(completedWordObject).includes(possWord)){
-                            let prevWordPath = completedWordObject[possWord];
-                            let prevWordPath_copy = [...prevWordPath];
-                            let currWordPath = prevWordPath_copy.push(nextPath);
-                            completedWordObject[possWord] = currWordPath;
+                            completedWordObject[possWord].push(nextPath);
                         } else{
                             completedWordObject[possWord] = nextPath;
                         }
