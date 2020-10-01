@@ -435,6 +435,8 @@ function convertIndexToRowCol(index){
 // (making sure the same index isn't visited twice)
 function getPossibleMoves(prevMoveList){
     console.log("In get poss. moves, the prev move list is: " + prevMoveList);
+    // This works correctly regardless of whether the prevMoveList has a single entry (in which case this 
+    // selects that) or multiple entries (in which case it selects the last one)
     let lastMove = prevMoveList[prevMoveList.length - 1];
     let possMoves = [];
     let rowColConversion = convertIndexToRowCol(lastMove);
@@ -629,18 +631,27 @@ function calculateAnswers(index, currRow, currCol){
                     possWordReturnCode = checkIfWordStartInList(possWord);
 
                     if(possWordReturnCode == 0){
+                        console.log("In return code 0");
                         continue;
                     }
 
                     if(possWordReturnCode == 1){
+                        console.log("In return code 1");
                         console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
-                        nextPath = prevPath.push(possIndex);
+                        // Makes a clone of the prevPath array so the following push doesn't affect the 
+                        // values in the prevPath
+                        nextPath = [...prevPath];
+                        nextPath.push(possIndex);
                         visitTracker_obj[genNum][possWord] = nextPath;
                     }
 
                     if(possWordReturnCode == 2){
+                        console.log("In return code 2");
                         console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
-                        nextPath = prevPath.push(possIndex);
+                        // Makes a clone of the prevPath array so the following push doesn't affect the 
+                        // values in the prevPath
+                        nextPath = [...prevPath]
+                        nextPath.push(possIndex);
                         completedWordObject[possWord] = nextPath;
                         visitTracker_obj[genNum][possWord] = nextPath;
                     }
