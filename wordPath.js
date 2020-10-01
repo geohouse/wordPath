@@ -652,7 +652,16 @@ function calculateAnswers(index, currRow, currCol){
                         // values in the prevPath
                         nextPath = [...prevPath]
                         nextPath.push(possIndex);
-                        completedWordObject[possWord] = nextPath;
+                        // If this word was already found, then add the new path found to make the
+                        // word to the previous path(s)
+                        if(Object.keys(completedWordObject).includes(possWord)){
+                            let prevWordPath = completedWordObject[possWord];
+                            let prevWordPath_copy = [...prevWordPath];
+                            let currWordPath = prevWordPath_copy.push(nextPath);
+                            completedWordObject[possWord] = currWordPath;
+                        } else{
+                            completedWordObject[possWord] = nextPath;
+                        }
                         visitTracker_obj[genNum][possWord] = nextPath;
                     }
                 }  
