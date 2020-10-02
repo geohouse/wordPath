@@ -112,6 +112,15 @@ section{
 
 .word-table-body{
     overflow:auto;
+    height: 300px;
+}
+
+.is-selected{
+    background-color:violet;
+}
+
+.not-selected{
+    background-color: white;
 }
 
 /*

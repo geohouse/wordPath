@@ -676,6 +676,34 @@ function calculateAnswers(index, currRow, currCol){
     }
 }
 
+// This is the callback function when a word in the word table is clicked
+// Allows toggling of selections when clicking on another word, or when clicking on the 
+// same word repeatedly
+function selectCell(cellNum){
+    let currCell = document.getElementById(cellNum);
+
+    if(cellNum != currSelectedCell){
+        // Clear any last selection
+        document.getElementById(currSelectedCell).className = "not-selected";
+        document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
+        currSelectedCell = cellNum;
+    }
+
+    selectedCellText = currCell.innerHTML;
+    
+    if(currCell.className === "is-selected"){
+        currCell.className = "not-selected";
+        // The String is a holder (&nbsp)
+        document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
+    } else{
+        currCell.className = "is-selected";
+        document.getElementById("selected-word").innerHTML = selectedCellText;
+    }
+
+}
+
+
+
 //let wordTableHeaderDiv = document.createElement('div');
 let wordTableBodyDiv = document.createElement('div');
 wordTableBodyDiv.className = "word-table-body";
@@ -705,8 +733,11 @@ function makeWordTable(){
         createdWordCell = document.createElement('td');
         //createdWordCell.id = currRow + "-" + currCol;
         createdWordCell.className = 'word-cell';
+        // Make a unique id value for each cell to enable word path lookup and clickability.
+        createdWordCell.id = i;
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
         console.log(Object.keys(completedWordObject)[i]);
+        createdWordCell.addEventListener("click", function(){selectCell(i)}, false);
         //createdPathCell = document.createElement('td');
         //createdPathCell.className = 'path-cell';
         // if(completedWordObject[Object.keys(completedWordObject)[i]].length === 1){
