@@ -744,7 +744,7 @@ function makeWordTable(){
 function showWordAnswers(){
     isToggled = toggle.checked;
     if(isToggled){
-        let completedWordObject = {};
+        completedWordObject = {};
         console.log("Showing answers");
         console.log(letterArray);
         // Provides object of arrays, with keys for each letter, and values for all words
