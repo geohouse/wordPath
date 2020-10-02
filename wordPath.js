@@ -1,9 +1,3 @@
-let mainTable = document.createElement('table');
-let tableRow = undefined;
-let tableCell = undefined;
-
-document.body.appendChild(mainTable);
-
 // Use a worker process to load the .json file with the word list and return it to the main
 // process. Need to do this to avoid deprecation warnings of file loading in the main
 // process slowing down content rendering.
