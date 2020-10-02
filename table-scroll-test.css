@@ -1,0 +1,18 @@
+td{
+    border: solid 4px greenyellow;
+    border-collapse: collapse;
+}
+
+#table-div{
+    width: 100px;
+    height:200px;
+    overflow:auto;
+}
+
+.is-selected{
+    background-color: red;
+}
+
+.not-selected{
+    background-color:white;
+}
