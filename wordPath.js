@@ -752,6 +752,8 @@ function showWordAnswers(){
             calculateAnswers(i, currRow, currCol);
         }
 
+        makeWordTable();
+
     }
     
 }
