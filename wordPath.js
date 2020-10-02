@@ -1,8 +1,11 @@
+let mainHolderDiv = document.createElement('div');
+mainHolderDiv.className = "main-hold-div";
 let mainTable = document.createElement('table');
 let tableRow = undefined;
 let tableCell = undefined;
 
-document.body.appendChild(mainTable);
+document.body.appendChild(mainHolderDiv);
+mainHolderDiv.appendChild(mainTable);
 
 // Use a worker process to load the .json file with the word list and return it to the main
 // process. Need to do this to avoid deprecation warnings of file loading in the main
