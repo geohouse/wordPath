@@ -44,6 +44,7 @@ function setUpGrid(){
         for(let currCol = 0; currCol < 4; currCol ++){
             tableCell = document.createElement('td');
             tableCell.id = currRow + "-" + currCol;
+            tableCell.className = "letter-grid";
             tableRow.appendChild(tableCell);
         }
 
@@ -695,7 +696,15 @@ function makeWordTable(){
         console.log(Object.keys(completedWordObject)[i]);
         createdPathCell = document.createElement('td');
         createdPathCell.className = 'path-cell';
-        createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
+        if(completedWordObject[Object.keys(completedWordObject)][i].length === 1){
+            createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i][0]];
+        } else{ 
+            for(let j = 0; j < completedWordObject[Object.keys(completedWordObject)][i].length; j++){
+                createdPathCell.innerHTML += completedWordObject[Object.keys(completedWordObject)[i][j]] + ";";
+            }
+            // Remove the last semicolon
+            createdPathCell.innerHTML = createdPathCell.innerHTML.substring(1,createdPathCell.innerHTML.length - 1);
+        }
         console.log(completedWordObject[Object.keys(completedWordObject)[i]]);
         // Add the path order number to the cell
         //createdCell.innerHTML = rowHolder[currRow][currCol];

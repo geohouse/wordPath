@@ -1,4 +1,4 @@
-td{
+.letter-grid{
     border: solid black 2px;
     font-size: 36pt;
     font-family:monospace;
@@ -35,6 +35,13 @@ td{
     height: 75px;
     font-size: 18pt;
 
+}
+
+.path-cell, .word-cell{
+    font-family: monospace;
+    font-size: 14pt;
+    border: solid 1px teal;
+    border-collapse: collapse;
 }
 
 #countdown-restart{
