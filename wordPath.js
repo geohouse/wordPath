@@ -1,3 +1,9 @@
+let mainTable = document.createElement('table');
+let tableRow = undefined;
+let tableCell = undefined;
+
+document.body.appendChild(mainTable);
+
 // Use a worker process to load the .json file with the word list and return it to the main
 // process. Need to do this to avoid deprecation warnings of file loading in the main
 // process slowing down content rendering.
@@ -666,12 +672,12 @@ function calculateAnswers(index, currRow, currCol){
 }
 
 
-let mainTable = document.createElement('table');
-let tableRow = undefined;
+let wordTable = document.createElement('table');
+let wordTableRow = undefined;
 let createdWordCell = undefined;
 let createdPathCell = undefined;
 
-document.body.appendChild(mainTable);
+document.body.appendChild(wordTable);
 
 // Initialize the table by looping through the desired number of rows first, creating those
 // then looping through the desired number of columns, adding a cell in each row for 
@@ -679,8 +685,8 @@ document.body.appendChild(mainTable);
 function makeWordTable(){
 
     for(let i = 0; i < completedWordObject.length; i++){
-        tableRow = document.createElement('tr');
-        mainTable.appendChild(tableRow);
+        wordTableRow = document.createElement('tr');
+        wordTable.appendChild(wordTableRow);
         
             createdWordCell = document.createElement('td');
             //createdWordCell.id = currRow + "-" + currCol;
@@ -696,8 +702,8 @@ function makeWordTable(){
             // initialize as non-path (will find the path in a later function)
             //createdCell.className = 'non-path';
             
-            tableRow.appendChild(createdWordCell);
-            tableRow.appendChild(createdPathCell);
+            wordTableRow.appendChild(createdWordCell);
+            wordTableRow.appendChild(createdPathCell);
         }
     }
 }
