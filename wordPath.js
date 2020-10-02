@@ -1,6 +1,7 @@
 let mainHolderDiv = document.createElement('div');
 mainHolderDiv.className = "main-hold-div";
 let mainTable = document.createElement('table');
+mainTable.className = "main-table";
 let tableRow = undefined;
 let tableCell = undefined;
 
@@ -677,11 +678,11 @@ function calculateAnswers(index, currRow, currCol){
 
 
 let wordTable = document.createElement('table');
+wordTable.className = "word-table";
+mainHolderDiv.appendChild(wordTable);
 let wordTableRow = undefined;
 let createdWordCell = undefined;
 let createdPathCell = undefined;
-
-document.body.appendChild(wordTable);
 
 // Initialize the table by looping through the desired number of rows first, creating those
 // then looping through the desired number of columns, adding a cell in each row for 
@@ -697,25 +698,25 @@ function makeWordTable(){
         createdWordCell.className = 'word-cell';
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
         console.log(Object.keys(completedWordObject)[i]);
-        createdPathCell = document.createElement('td');
-        createdPathCell.className = 'path-cell';
-        if(completedWordObject[Object.keys(completedWordObject)[i]].length === 1){
-            createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i][0]];
-        } else{ 
-            for(let j = 0; j < completedWordObject[Object.keys(completedWordObject)[i]].length; j++){
-                createdPathCell.innerHTML += completedWordObject[Object.keys(completedWordObject)[i][j]] + ";";
-            }
-            // Remove the last semicolon
-            createdPathCell.innerHTML = createdPathCell.innerHTML.substring(1,createdPathCell.innerHTML.length - 1);
-        }
-        console.log(completedWordObject[Object.keys(completedWordObject)[i]]);
+        //createdPathCell = document.createElement('td');
+        //createdPathCell.className = 'path-cell';
+        // if(completedWordObject[Object.keys(completedWordObject)[i]].length === 1){
+        //     createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i][0]];
+        // } else{ 
+        //     for(let j = 0; j < completedWordObject[Object.keys(completedWordObject)[i]].length; j++){
+        //         createdPathCell.innerHTML += completedWordObject[Object.keys(completedWordObject)[i][j]] + ";";
+        //     }
+        //     // Remove the last semicolon
+        //     createdPathCell.innerHTML = createdPathCell.innerHTML.substring(1,createdPathCell.innerHTML.length - 1);
+        // }
+        // console.log(completedWordObject[Object.keys(completedWordObject)[i]]);
         // Add the path order number to the cell
         //createdCell.innerHTML = rowHolder[currRow][currCol];
         // initialize as non-path (will find the path in a later function)
         //createdCell.className = 'non-path';
         
         wordTableRow.appendChild(createdWordCell);
-        wordTableRow.appendChild(createdPathCell);
+        // wordTableRow.appendChild(createdPathCell);
     }
 }
 

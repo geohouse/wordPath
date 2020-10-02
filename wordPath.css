@@ -37,7 +37,7 @@
 
 }
 
-.path-cell, .word-cell{
+.word-cell{
     font-family: monospace;
     font-size: 14pt;
     border: solid 1px teal;
@@ -108,6 +108,10 @@ section{
 #num-vowel{
     font-size: 14pt;
     font-weight: bold;;
+}
+
+.word-table{
+    overflow:scroll;
 }
 
 /*
