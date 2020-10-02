@@ -110,8 +110,8 @@ section{
     font-weight: bold;;
 }
 
-.word-table{
-    overflow:scroll;
+.word-table-body{
+    overflow:auto;
 }
 
 /*

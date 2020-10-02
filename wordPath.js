@@ -676,18 +676,27 @@ function calculateAnswers(index, currRow, currCol){
     }
 }
 
-
+//let wordTableHeaderDiv = document.createElement('div');
+let wordTableBodyDiv = document.createElement('div');
+wordTableBodyDiv.className = "word-table-body";
+//let wordTableHeader = document.createElement('table');
+//let wordTableHeaderRow = document.createElement('tr');
+//wordTableHeaderRow.innerHTML = "List of words found:";
+//mainHolderDiv.appendChild(wordTableHeaderDiv).appendChild(wordTableHeader).appendChild(wordTableHeaderRow);
+//wordTableHeader.appendChild()
 let wordTable = document.createElement('table');
-wordTable.className = "word-table";
-mainHolderDiv.appendChild(wordTable);
+wordTable.id = "word-table";
+mainHolderDiv.appendChild(wordTableBodyDiv).appendChild(wordTable);
 let wordTableRow = undefined;
 let createdWordCell = undefined;
 let createdPathCell = undefined;
-
 // Initialize the table by looping through the desired number of rows first, creating those
 // then looping through the desired number of columns, adding a cell in each row for 
 // each desired column. Set the ID of each table cell to be the <rowNum>-<colNum> (0-based)
 function makeWordTable(){
+    // reset the table.
+    wordTable = document.getElementById("word-table");
+    wordTable.innerHTML = "";
     console.log("in make word table")
     for(let i = 0; i < Object.keys(completedWordObject).length; i++){
         wordTableRow = document.createElement('tr');
