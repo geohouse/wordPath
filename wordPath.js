@@ -681,7 +681,7 @@ function calculateAnswers(index, currRow, currCol){
 // completedWordObject['sea'][0][0]
 // returns Array(3) [ 10, 14, 15 ]
 //completedWordObject['sea'][0][0]
-// returns Array(3) [ 13, 14, 15 ]
+// returns Array(3) [ 13, 14, 15 ]  
 
 function showWordAnswers(){
     isToggled = toggle.checked;
@@ -714,6 +714,11 @@ function showWordAnswers(){
             currCol = i - (4 * currRow);
             console.log("calculateAnswers called.");
             calculateAnswers(i, currRow, currCol);
+        }
+        let wordList = document.createElement('div').id="word-list";
+        document.body.appendChild(wordList);
+        for(let i = 0; i < completedWordObject.length; i++){
+            document.getElementById("word-list").innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
         }
 
     }
