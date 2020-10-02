@@ -671,6 +671,43 @@ function calculateAnswers(index, currRow, currCol){
     }
 }
 
+
+let mainTable = document.createElement('table');
+let tableRow = undefined;
+let createdWordCell = undefined;
+let createdPathCell = undefined;
+
+document.body.appendChild(mainTable);
+
+// Initialize the table by looping through the desired number of rows first, creating those
+// then looping through the desired number of columns, adding a cell in each row for 
+// each desired column. Set the ID of each table cell to be the <rowNum>-<colNum> (0-based)
+function makeWordTable(){
+
+    for(let i = 0; i < completedWordObject.length; i++){
+        tableRow = document.createElement('tr');
+        mainTable.appendChild(tableRow);
+        
+            createdWordCell = document.createElement('td');
+            //createdWordCell.id = currRow + "-" + currCol;
+            createdWordCell.className = 'word-cell';
+            createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
+
+            createdPathCell = document.createElement('td');
+            createdPathCell.className = 'path-cell';
+            createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
+
+            // Add the path order number to the cell
+            //createdCell.innerHTML = rowHolder[currRow][currCol];
+            // initialize as non-path (will find the path in a later function)
+            //createdCell.className = 'non-path';
+            
+            tableRow.appendChild(createdWordCell);
+            tableRow.appendChild(createdPathCell);
+        }
+    }
+}
+
 // Due to the tracking of multiple potential paths for each word,
 // when indexing into completedWordObject, need to provide 2 indices (works regardless of 
 // whether the current word has multiple paths or only 1 path) e.g.
@@ -714,11 +751,6 @@ function showWordAnswers(){
             currCol = i - (4 * currRow);
             console.log("calculateAnswers called.");
             calculateAnswers(i, currRow, currCol);
-        }
-        let wordList = document.createElement('div').id="word-list";
-        document.body.appendChild(wordList);
-        for(let i = 0; i < completedWordObject.length; i++){
-            document.getElementById("word-list").innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
         }
 
     }
