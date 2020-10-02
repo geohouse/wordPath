@@ -696,7 +696,7 @@ function makeWordTable(){
         console.log(Object.keys(completedWordObject)[i]);
         createdPathCell = document.createElement('td');
         createdPathCell.className = 'path-cell';
-        if(completedWordObject[Object.keys(completedWordObject)][i].length === 1){
+        if(completedWordObject[Object.keys(completedWordObject)[i]].length === 1){
             createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i][0]];
         } else{ 
             for(let j = 0; j < completedWordObject[Object.keys(completedWordObject)][i].length; j++){
