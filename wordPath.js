@@ -688,23 +688,22 @@ function makeWordTable(){
         wordTableRow = document.createElement('tr');
         wordTable.appendChild(wordTableRow);
         
-            createdWordCell = document.createElement('td');
-            //createdWordCell.id = currRow + "-" + currCol;
-            createdWordCell.className = 'word-cell';
-            createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
+        createdWordCell = document.createElement('td');
+        //createdWordCell.id = currRow + "-" + currCol;
+        createdWordCell.className = 'word-cell';
+        createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
 
-            createdPathCell = document.createElement('td');
-            createdPathCell.className = 'path-cell';
-            createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
+        createdPathCell = document.createElement('td');
+        createdPathCell.className = 'path-cell';
+        createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
 
-            // Add the path order number to the cell
-            //createdCell.innerHTML = rowHolder[currRow][currCol];
-            // initialize as non-path (will find the path in a later function)
-            //createdCell.className = 'non-path';
-            
-            wordTableRow.appendChild(createdWordCell);
-            wordTableRow.appendChild(createdPathCell);
-        }
+        // Add the path order number to the cell
+        //createdCell.innerHTML = rowHolder[currRow][currCol];
+        // initialize as non-path (will find the path in a later function)
+        //createdCell.className = 'non-path';
+        
+        wordTableRow.appendChild(createdWordCell);
+        wordTableRow.appendChild(createdPathCell);
     }
 }
 
