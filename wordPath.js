@@ -683,7 +683,7 @@ document.body.appendChild(wordTable);
 // then looping through the desired number of columns, adding a cell in each row for 
 // each desired column. Set the ID of each table cell to be the <rowNum>-<colNum> (0-based)
 function makeWordTable(){
-
+    console.log("in make word table")
     for(let i = 0; i < completedWordObject.length; i++){
         wordTableRow = document.createElement('tr');
         wordTable.appendChild(wordTableRow);
@@ -692,11 +692,11 @@ function makeWordTable(){
         //createdWordCell.id = currRow + "-" + currCol;
         createdWordCell.className = 'word-cell';
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
-
+        console.log(Object.keys(completedWordObject)[i]);
         createdPathCell = document.createElement('td');
         createdPathCell.className = 'path-cell';
         createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i]];
-
+        console.log(completedWordObject[Object.keys(completedWordObject)[i]]);
         // Add the path order number to the cell
         //createdCell.innerHTML = rowHolder[currRow][currCol];
         // initialize as non-path (will find the path in a later function)
