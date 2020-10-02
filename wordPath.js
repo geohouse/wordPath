@@ -699,7 +699,7 @@ function makeWordTable(){
         if(completedWordObject[Object.keys(completedWordObject)[i]].length === 1){
             createdPathCell.innerHTML = completedWordObject[Object.keys(completedWordObject)[i][0]];
         } else{ 
-            for(let j = 0; j < completedWordObject[Object.keys(completedWordObject)][i].length; j++){
+            for(let j = 0; j < completedWordObject[Object.keys(completedWordObject)[i]].length; j++){
                 createdPathCell.innerHTML += completedWordObject[Object.keys(completedWordObject)[i][j]] + ";";
             }
             // Remove the last semicolon
