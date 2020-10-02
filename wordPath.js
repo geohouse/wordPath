@@ -684,7 +684,7 @@ document.body.appendChild(wordTable);
 // each desired column. Set the ID of each table cell to be the <rowNum>-<colNum> (0-based)
 function makeWordTable(){
     console.log("in make word table")
-    for(let i = 0; i < completedWordObject.length; i++){
+    for(let i = 0; i < Object.keys(completedWordObject).length; i++){
         wordTableRow = document.createElement('tr');
         wordTable.appendChild(wordTableRow);
         
