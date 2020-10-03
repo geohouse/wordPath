@@ -623,70 +623,95 @@ function calculateAnswers(index, currRow, currCol){
             for(let i = 0; i < prevGenKeys.length; i++){
                 // This is the string
                 lastEntry = prevGenKeys[i];
-                // This is the path to get to the string
-                prevPath = prevGenObject[lastEntry];
-                // HERE DEBUG
-                console.log
-                possibleMoves = getPossibleMoves(prevPath);
-                console.log("In for. The lastEntry is: " + lastEntry + " the prevPath is: " + prevPath);
-                //console.log("Is the prevPath an array? " + Array.isArray(prevPath));
-                console.log("The possible moves are: " + possibleMoves);
+                // List of the paths(s) to get to the string. May have length > 1 if
+                // more than 1 paths were possible, and will continue searching for each of them.
+                prevPathList = prevGenObject[lastEntry];
+                for(let j = 0; j < prevPathList.length; j++){
+                    
+                    prevPath = prevPathList[j];
 
-                // For each of the possible moves, see whether it provides a finished word or not.
-                for(let i = 0; i < possibleMoves.length; i++){
-                    possIndex = possibleMoves[i];
-                    rowColConversion = convertIndexToRowCol(possIndex);
-                    possRow = rowColConversion[0];
-                    possCol = rowColConversion[1];
-                    //console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
-                    // Get the letter represented by the current possible move
-                    possLetter = document.getElementById(possRow + "-" + possCol).innerHTML.toLowerCase();
-                    possWord = lastEntry + possLetter;
-                    //possWordReturnCode acts as 3-level boolean with 
-                    // 0 = wordStart not in the list (stop this direction of searching by not including the 
-                    // word and its path in the visitTracker_obj object for the current genNum),
-                    // 1 = wordStart in the list as a subset of a longer word (so keep the search going by
-                    // adding the word and its path to the visitTracker_obj object for the current genNum)
-                    // 2 = wordStart is a word in the list, and should be counted as another word found,
-                    // and the word and its path are added to the completedWordObj as well as the visitTracker_obj
-                    // in case the current complete word is also part of a longer word to be found as well.
-
-                    possWordReturnCode = checkIfWordStartInList(possWord);
-
-                    if(possWordReturnCode == 0){
-                        console.log("In return code 0");
-                        continue;
+                    if(prevPathList.length > 1){
+                        console.log("Multiple paths for entry: " + lastEntry);
+                        console.log("Currently processing: " + prevPath);
                     }
 
-                    if(possWordReturnCode == 1){
-                        console.log("In return code 1");
-                        console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
-                        // Makes a clone of the prevPath array so the following push doesn't affect the 
-                        // values in the prevPath
-                        nextPath = [...prevPath];
-                        nextPath.push(possIndex);
-                        visitTracker_obj[genNum][possWord] = nextPath;
-                    }
+                    possibleMoves = getPossibleMoves(prevPath);
+                    console.log("In for. The lastEntry is: " + lastEntry + " the prevPath is: " + prevPath);
+                    //console.log("Is the prevPath an array? " + Array.isArray(prevPath));
+                    console.log("The possible moves are: " + possibleMoves);
 
-                    if(possWordReturnCode == 2){
-                        console.log("In return code 2");
-                        console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
-                        // Makes a clone of the prevPath array so the following push doesn't affect the 
-                        // values in the prevPath
-                        nextPath = [...prevPath]
-                        nextPath.push(possIndex);
-                        // If this word was already found, then add the new path found to make the
-                        // word to the previous path(s)
-                        if(Object.keys(completedWordObject).includes(possWord)){
-                            // push as an array
-                            completedWordObject[possWord].push([nextPath]);
-                        } else{
-                            completedWordObject[possWord] = [];
-                            completedWordObject[possWord].push([nextPath]);
+                    // For each of the possible moves, see whether it provides a finished word or not.
+                    for(let i = 0; i < possibleMoves.length; i++){
+                        possIndex = possibleMoves[i];
+                        rowColConversion = convertIndexToRowCol(possIndex);
+                        possRow = rowColConversion[0];
+                        possCol = rowColConversion[1];
+                        //console.log("For poss move num: " + i + " The row is: " + possRow + " and the col is: " + possCol);
+                        // Get the letter represented by the current possible move
+                        possLetter = document.getElementById(possRow + "-" + possCol).innerHTML.toLowerCase();
+                        possWord = lastEntry + possLetter;
+                        //possWordReturnCode acts as 3-level boolean with 
+                        // 0 = wordStart not in the list (stop this direction of searching by not including the 
+                        // word and its path in the visitTracker_obj object for the current genNum),
+                        // 1 = wordStart in the list as a subset of a longer word (so keep the search going by
+                        // adding the word and its path to the visitTracker_obj object for the current genNum)
+                        // 2 = wordStart is a word in the list, and should be counted as another word found,
+                        // and the word and its path are added to the completedWordObj as well as the visitTracker_obj
+                        // in case the current complete word is also part of a longer word to be found as well.
+
+                        possWordReturnCode = checkIfWordStartInList(possWord);
+
+                        if(possWordReturnCode == 0){
+                            console.log("In return code 0");
+                            continue;
                         }
-                        visitTracker_obj[genNum][possWord] = nextPath;
-                    }
-                }  
+
+                        if(possWordReturnCode == 1){
+                            console.log("In return code 1");
+                            console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
+                            // Makes a clone of the prevPath array so the following push doesn't affect the 
+                            // values in the prevPath
+                            nextPath = [...prevPath];
+                            nextPath.push(possIndex);
+                            // If this poss. word is already included (having a different poss. path),
+                            // then include the current poss. path as part of the holder list.
+                            if(Object.keys(visitTracker_obj[genNum]).includes(possWord)){
+                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                            } else{
+                                visitTracker_obj[genNum][possWord] = [];
+                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                            }
+                        }
+
+                        if(possWordReturnCode == 2){
+                            console.log("In return code 2");
+                            console.log("The prevPath is: " + prevPath + " and the poss. index is: " + possIndex);
+                            // Makes a clone of the prevPath array so the following push doesn't affect the 
+                            // values in the prevPath
+                            nextPath = [...prevPath]
+                            nextPath.push(possIndex);
+
+                            // If this poss. word is already included (having a different poss. path),
+                            // then include the current poss. path as part of the holder list.
+                            if(Object.keys(visitTracker_obj[genNum]).includes(possWord)){
+                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                            } else{
+                                visitTracker_obj[genNum][possWord] = [];
+                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                            }
+
+                            // If this word was already found, then add the new path found to make the
+                            // word to the previous path(s)
+                            if(Object.keys(completedWordObject).includes(possWord)){
+                                // push as an array
+                                completedWordObject[possWord].push([nextPath]);
+                            } else{
+                                completedWordObject[possWord] = [];
+                                completedWordObject[possWord].push([nextPath]);
+                            }
+                        }
+                    } 
+                } 
             }
         }
 
