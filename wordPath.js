@@ -723,6 +723,9 @@ function selectCell(cellNum){
         currCell.className = "word-cell is-selected";
         document.getElementById("selected-word-header").innerHTML = "The selected word is:"
         document.getElementById("selected-word").innerHTML = currWord;
+
+        document.getElementById("selected-path-header").innerHTML = "The path of the selected word is:"
+        document.getElementById("selected-path").innerHTML = currPath;
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
