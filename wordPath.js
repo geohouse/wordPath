@@ -728,7 +728,7 @@ function selectCell(cellNum){
         // The path is either a single path (if only 1 way to make the word), or multiple paths
         // (multiple ways to make the word). If multiple, add to the entry with semi-colons separating each path.
         if(currPathArray.length === 1){
-            document.getElementById("selected-path").innerHTML = currPath;
+            document.getElementById("selected-path").innerHTML = currPathArray[0];
         } else{
             for(let i = 0; i < currPathArray.length; i++){
                 // Initialize the innerHTML entry
