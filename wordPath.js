@@ -599,8 +599,18 @@ function calculateAnswers(index, currRow, currCol){
                 // it to the visitTracker_obj, 
                 console.log("The last entry is: " + lastEntry + " the poss. letter is: " + possLetter + " and the combo is: " + lastEntry + possLetter);
                 if(representedTwoLetterStems.includes(lastEntry + possLetter)){
-                    // Assign the lastIndex and possIndex to a list 
-                    visitTracker_obj[genNum][lastEntry + possLetter] = [lastIndex, possIndex];
+                    // Assign the lastIndex and possIndex to a list within a list (needed because multiple
+                    // paths for the same ) 
+
+                    // If this poss. two letter word stem is already included (having a different poss. path),
+                    // then include the current poss. path as part of the holder list.
+                    if(Object.keys(visitTracker_obj[genNum]).includes(lastEntry + possLetter)){
+                        visitTracker_obj[genNum][lastEntry + possLetter].push([lastIndex, possIndex]);
+                    } else{
+                        visitTracker_obj[genNum][lastEntry + possLetter] = [];
+                        visitTracker_obj[genNum][lastEntry + possLetter].push([lastIndex, possIndex]);
+                    }
+
                     console.log("For gen: " + genNum + " adding entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
                 } else{
                     console.log("For gen: " + genNum + " SKIPPING entry: " + lastEntry + possLetter + " with index track: " + lastIndex + "," + possIndex);
