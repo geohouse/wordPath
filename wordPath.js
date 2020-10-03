@@ -732,7 +732,6 @@ function makeWordTable(){
         
         createdWordCell = document.createElement('td');
         //createdWordCell.id = currRow + "-" + currCol;
-        createdWordCell.className = 'word-cell';
         // Make a unique id value for each cell to enable word path lookup and clickability.
         createdWordCell.id = i;
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
