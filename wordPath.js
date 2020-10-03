@@ -8,6 +8,21 @@ let tableCell = undefined;
 document.body.appendChild(mainHolderSection);
 mainHolderSection.appendChild(mainTable);
 
+
+
+//let wordTableHeaderDiv = document.createElement('div');
+let wordTableBodyDiv = document.createElement('div');
+wordTableBodyDiv.className = "word-table-body";
+//let wordTableHeader = document.createElement('table');
+//let wordTableHeaderRow = document.createElement('tr');
+//wordTableHeaderRow.innerHTML = "List of words found:";
+//mainHolderSection.appendChild(wordTableHeaderDiv).appendChild(wordTableHeader).appendChild(wordTableHeaderRow);
+//wordTableHeader.appendChild()
+let wordTable = document.createElement('table');
+wordTable.id = "word-table";
+mainHolderSection.appendChild(wordTableBodyDiv).appendChild(wordTable);
+
+
 // Use a worker process to load the .json file with the word list and return it to the main
 // process. Need to do this to avoid deprecation warnings of file loading in the main
 // process slowing down content rendering.
@@ -231,6 +246,10 @@ setUpGrid();
 function makeGame(){
     
     clearGrid();
+
+    // reset the word table.
+    wordTable = document.getElementById("word-table");
+    wordTable.innerHTML = "";
 
     rollDice();
 
@@ -706,22 +725,14 @@ function selectCell(cellNum){
 
 }
 
-
-
-//let wordTableHeaderDiv = document.createElement('div');
-let wordTableBodyDiv = document.createElement('div');
-wordTableBodyDiv.className = "word-table-body";
-//let wordTableHeader = document.createElement('table');
-//let wordTableHeaderRow = document.createElement('tr');
-//wordTableHeaderRow.innerHTML = "List of words found:";
-//mainHolderSection.appendChild(wordTableHeaderDiv).appendChild(wordTableHeader).appendChild(wordTableHeaderRow);
-//wordTableHeader.appendChild()
-let wordTable = document.createElement('table');
-wordTable.id = "word-table";
-mainHolderSection.appendChild(wordTableBodyDiv).appendChild(wordTable);
 let wordTableRow = undefined;
 let createdWordCell = undefined;
 let createdPathCell = undefined;
+let scoreCounter = 0;
+
+// These are the scores per word length
+let scoringObject={3:1, 4:1, 5:2, 6:3, 7:5, 8:11, 9:11, 10:11, 11:11, 12:11, 13:11, 14:11, 15:11, 16:11};
+
 // Initialize the table by looping through the desired number of rows first, creating those
 // then looping through the desired number of columns, adding a cell in each row for 
 // each desired column. Set the ID of each table cell to be the <rowNum>-<colNum> (0-based)
@@ -742,6 +753,10 @@ function makeWordTable(){
         // so need to use classList.add() here to add a class to the existing class list.
         createdWordCell.className = "word-cell";
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
+
+        // Look up the score for this word given its length and add to the tally
+        scoreCounter += scoringObject[Object.keys(completedWordObject)[i].length];
+        
         console.log(Object.keys(completedWordObject)[i]);
         createdWordCell.addEventListener("click", function(){selectCell(i)}, false);
         //createdPathCell = document.createElement('td');
