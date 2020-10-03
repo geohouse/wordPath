@@ -68,7 +68,7 @@ section{
     background: lightgray;
     outline: none;
     opacity: 0.7;
-    transition opacity 0.2s;
+    transition: opacity 0.2s;
     border: solid gray 2px;
     border-radius: 5px;
 }

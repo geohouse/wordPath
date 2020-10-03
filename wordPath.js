@@ -756,7 +756,7 @@ function makeWordTable(){
 
         // Look up the score for this word given its length and add to the tally
         scoreCounter += scoringObject[Object.keys(completedWordObject)[i].length];
-        
+
         console.log(Object.keys(completedWordObject)[i]);
         createdWordCell.addEventListener("click", function(){selectCell(i)}, false);
         //createdPathCell = document.createElement('td');
@@ -827,6 +827,8 @@ function showWordAnswers(){
         }
 
         makeWordTable();
+
+        document.getElementById("score-holder").innerHTML = scoreCounter;
 
     }
     
