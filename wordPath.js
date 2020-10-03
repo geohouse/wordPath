@@ -679,8 +679,12 @@ function calculateAnswers(index, currRow, currCol){
 // This is the callback function when a word in the word table is clicked
 // Allows toggling of selections when clicking on another word, or when clicking on the 
 // same word repeatedly
+
+// This will keep track of which cell currently has the selection (avoids having to loop through to find it)
+let currSelectedCell = undefined;
+
 function selectCell(cellNum){
-    let currSelectedCell = document.getElementById(cellNum);
+    let currCell = document.getElementById(cellNum);
 
     if(cellNum != currSelectedCell){
         // Clear any last selection
