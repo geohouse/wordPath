@@ -681,14 +681,14 @@ function calculateAnswers(index, currRow, currCol){
 // same word repeatedly
 
 // This will keep track of which cell currently has the selection (avoids having to loop through to find it)
-let currSelectedCell = undefined;
+let currSelectedCell = 0;
 
 function selectCell(cellNum){
     let currCell = document.getElementById(cellNum);
 
     if(cellNum != currSelectedCell){
         // Clear any last selection
-        document.getElementById(currSelectedCell).className = "not-selected";
+        document.getElementById(currSelectedCell).classList.add("not-selected");
         document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
     }
@@ -696,11 +696,11 @@ function selectCell(cellNum){
     selectedCellText = currCell.innerHTML;
     
     if(currCell.className === "is-selected"){
-        currCell.className = "not-selected";
+        currCell.classList.add("not-selected");
         // The String is a holder (&nbsp)
         document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
-        currCell.className = "is-selected";
+        currCell.classList.add("is-selected");
         document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
@@ -738,6 +738,9 @@ function makeWordTable(){
         //createdWordCell.id = currRow + "-" + currCol;
         // Make a unique id value for each cell to enable word path lookup and clickability.
         createdWordCell.id = i;
+        // Will have multiple classes for CSS (depending on whether selected or not too),
+        // so need to use classList.add() here to add a class to the existing class list.
+        createdWordCell.classList.add("word-cell");
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
         console.log(Object.keys(completedWordObject)[i]);
         createdWordCell.addEventListener("click", function(){selectCell(i)}, false);
