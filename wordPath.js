@@ -625,7 +625,7 @@ function calculateAnswers(index, currRow, currCol){
                 lastEntry = prevGenKeys[i];
                 // List of the paths(s) to get to the string. May have length > 1 if
                 // more than 1 paths were possible, and will continue searching for each of them.
-                prevPathList = prevGenObject[lastEntry];
+                prevPathList = prevGenObject[lastEntry][0];
                 for(let j = 0; j < prevPathList.length; j++){
                     
                     prevPath = prevPathList[j];
