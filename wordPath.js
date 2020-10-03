@@ -705,7 +705,7 @@ let currSelectedCell = 0;
 function selectCell(cellNum){
     let currCell = document.getElementById(cellNum);
     let currWord = Object.keys(completedWordObject)[cellNum];
-    let currPath = completedWordObject[Object.keys(completedWordObject)[cellNum]];
+    let currPathArray = completedWordObject[Object.keys(completedWordObject)[cellNum]];
     if(cellNum != currSelectedCell){
         // Clear any last selection
         document.getElementById(currSelectedCell).className = "word-cell not-selected";
@@ -725,7 +725,22 @@ function selectCell(cellNum){
         document.getElementById("selected-word").innerHTML = currWord;
 
         document.getElementById("selected-path-header").innerHTML = "The path of the selected word is:"
-        document.getElementById("selected-path").innerHTML = currPath;
+        // The path is either a single path (if only 1 way to make the word), or multiple paths
+        // (multiple ways to make the word). If multiple, add to the entry with semi-colons separating each path.
+        if(currPathArray.length === 1){
+            document.getElementById("selected-path").innerHTML = currPath;
+        } else{
+            for(let i = 0; i < currPathArray.length; i++){
+                // Initialize the innerHTML entry
+                if(i == 0){
+                    document.getElementById("selected-path").innerHTML = currPathArray[i] + ";";
+                } else if(i < currPathArray.length - 1){
+                    document.getElementById("selected-path").innerHTML += currPathArray[i] + ";";
+                } else{
+                    document.getElementById("selected-path").innerHTML += currPathArray[i];
+                }
+            }
+        }
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
