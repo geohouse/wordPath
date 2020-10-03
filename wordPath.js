@@ -1,12 +1,12 @@
-let mainHolderDiv = document.createElement('div');
-mainHolderDiv.className = "main-hold-div";
+let mainHolderSection = document.createElement('section');
+mainHolderSection.className = "main-hold-div";
 let mainTable = document.createElement('table');
 mainTable.className = "main-table";
 let tableRow = undefined;
 let tableCell = undefined;
 
-document.body.appendChild(mainHolderDiv);
-mainHolderDiv.appendChild(mainTable);
+document.body.appendChild(mainHolderSection);
+mainHolderSection.appendChild(mainTable);
 
 // Use a worker process to load the .json file with the word list and return it to the main
 // process. Need to do this to avoid deprecation warnings of file loading in the main
@@ -689,7 +689,7 @@ function selectCell(cellNum){
     if(cellNum != currSelectedCell){
         // Clear any last selection
         document.getElementById(currSelectedCell).classList.add("not-selected");
-        document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
+        //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
     }
 
@@ -698,10 +698,10 @@ function selectCell(cellNum){
     if(currCell.className === "is-selected"){
         currCell.classList.add("not-selected");
         // The String is a holder (&nbsp)
-        document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
+        //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
         currCell.classList.add("is-selected");
-        document.getElementById("selected-word").innerHTML = selectedCellText;
+        //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
 }
@@ -714,11 +714,11 @@ wordTableBodyDiv.className = "word-table-body";
 //let wordTableHeader = document.createElement('table');
 //let wordTableHeaderRow = document.createElement('tr');
 //wordTableHeaderRow.innerHTML = "List of words found:";
-//mainHolderDiv.appendChild(wordTableHeaderDiv).appendChild(wordTableHeader).appendChild(wordTableHeaderRow);
+//mainHolderSection.appendChild(wordTableHeaderDiv).appendChild(wordTableHeader).appendChild(wordTableHeaderRow);
 //wordTableHeader.appendChild()
 let wordTable = document.createElement('table');
 wordTable.id = "word-table";
-mainHolderDiv.appendChild(wordTableBodyDiv).appendChild(wordTable);
+mainHolderSection.appendChild(wordTableBodyDiv).appendChild(wordTable);
 let wordTableRow = undefined;
 let createdWordCell = undefined;
 let createdPathCell = undefined;
