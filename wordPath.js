@@ -696,11 +696,11 @@ function selectCell(cellNum){
     selectedCellText = currCell.innerHTML;
     
     if(currCell.className === "word-cell is-selected"){
-        currCell.classList.add("word-cell not-selected");
+        currCell.className = "word-cell not-selected");
         // The String is a holder (&nbsp)
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
-        currCell.classList.add("word-cell is-selected");
+        currCell.className = "word-cell is-selected");
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
