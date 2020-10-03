@@ -680,7 +680,7 @@ function calculateAnswers(index, currRow, currCol){
 // Allows toggling of selections when clicking on another word, or when clicking on the 
 // same word repeatedly
 function selectCell(cellNum){
-    let currCell = document.getElementById(cellNum);
+    let currSelectedCell = document.getElementById(cellNum);
 
     if(cellNum != currSelectedCell){
         // Clear any last selection
