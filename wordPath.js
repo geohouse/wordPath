@@ -688,7 +688,7 @@ function selectCell(cellNum){
 
     if(cellNum != currSelectedCell){
         // Clear any last selection
-        document.getElementById(currSelectedCell).class("word-cell not-selected");
+        document.getElementById(currSelectedCell).className = "word-cell not-selected";
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
     }
