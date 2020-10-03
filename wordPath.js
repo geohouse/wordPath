@@ -688,19 +688,19 @@ function selectCell(cellNum){
 
     if(cellNum != currSelectedCell){
         // Clear any last selection
-        document.getElementById(currSelectedCell).classList.add("not-selected");
+        document.getElementById(currSelectedCell).class("word-cell not-selected");
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
     }
 
     selectedCellText = currCell.innerHTML;
     
-    if(currCell.className === "is-selected"){
-        currCell.classList.add("not-selected");
+    if(currCell.className === "word-cell is-selected"){
+        currCell.classList.add("word-cell not-selected");
         // The String is a holder (&nbsp)
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
-        currCell.classList.add("is-selected");
+        currCell.classList.add("word-cell is-selected");
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
@@ -740,7 +740,7 @@ function makeWordTable(){
         createdWordCell.id = i;
         // Will have multiple classes for CSS (depending on whether selected or not too),
         // so need to use classList.add() here to add a class to the existing class list.
-        createdWordCell.classList.add("word-cell");
+        createdWordCell.className = "word-cell";
         createdWordCell.innerHTML = Object.keys(completedWordObject)[i]
         console.log(Object.keys(completedWordObject)[i]);
         createdWordCell.addEventListener("click", function(){selectCell(i)}, false);
