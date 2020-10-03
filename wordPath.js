@@ -704,7 +704,8 @@ let currSelectedCell = 0;
 
 function selectCell(cellNum){
     let currCell = document.getElementById(cellNum);
-
+    let currWord = Object.keys(completedWordObject)[cellNum];
+    let currPath = completedWordObject[Object.keys(completedWordObject)[cellNum]];
     if(cellNum != currSelectedCell){
         // Clear any last selection
         document.getElementById(currSelectedCell).className = "word-cell not-selected";
@@ -720,6 +721,8 @@ function selectCell(cellNum){
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
         currCell.className = "word-cell is-selected";
+        document.getElementById("selected-word-header").innerHTML = "The selected word is:"
+        document.getElementById("selected-word").innerHTML = currWord;
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
