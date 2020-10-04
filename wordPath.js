@@ -638,6 +638,12 @@ function calculateAnswers(index, currRow, currCol){
                 prevPathList = prevGenObject[lastEntry];
                 for(let j = 0; j < prevPathList.length; j++){
                     
+                    // Because there are nested arrays (one array per different path),
+                    // indexing just by j returns the array around the array of interest,
+                    // so still need to index into it with [0] to get its only entry, which are
+                    // the array elements.
+                    // FUTURE - this is prob. 1 layer more nesting than necessary, and could figure
+                    // out how to remove it.
                     prevPath = prevPathList[j];
 
                     if(prevPathList.length > 1){
@@ -686,10 +692,10 @@ function calculateAnswers(index, currRow, currCol){
                             // If this poss. word is already included (having a different poss. path),
                             // then include the current poss. path as part of the holder list.
                             if(Object.keys(visitTracker_obj[genNum]).includes(possWord)){
-                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                                visitTracker_obj[genNum][possWord].push(nextPath);
                             } else{
                                 visitTracker_obj[genNum][possWord] = [];
-                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                                visitTracker_obj[genNum][possWord].push(nextPath);
                             }
                         }
 
@@ -704,20 +710,20 @@ function calculateAnswers(index, currRow, currCol){
                             // If this poss. word is already included (having a different poss. path),
                             // then include the current poss. path as part of the holder list.
                             if(Object.keys(visitTracker_obj[genNum]).includes(possWord)){
-                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                                visitTracker_obj[genNum][possWord].push(nextPath);
                             } else{
                                 visitTracker_obj[genNum][possWord] = [];
-                                visitTracker_obj[genNum][possWord].push([nextPath]);
+                                visitTracker_obj[genNum][possWord].push(nextPath);
                             }
 
                             // If this word was already found, then add the new path found to make the
                             // word to the previous path(s)
                             if(Object.keys(completedWordObject).includes(possWord)){
                                 // push as an array
-                                completedWordObject[possWord].push([nextPath]);
+                                completedWordObject[possWord].push(nextPath);
                             } else{
                                 completedWordObject[possWord] = [];
-                                completedWordObject[possWord].push([nextPath]);
+                                completedWordObject[possWord].push(nextPath);
                             }
                         }
                     } 
