@@ -263,7 +263,7 @@ function makeGame(){
     displayBoard(shuffledArray);
 
     // Delete previous path highlighting if it exists
-    if(prevPathArray.length === 0){
+    if(prevPathArray.length != 0){
         unHighlightPath(prevPathArray[0]);
     }
 }
