@@ -2,7 +2,7 @@
     border: solid black 2px;
     font-size: 36pt;
     font-family:monospace;
-    background-color: lavender;
+    background-color: papayawhip;
     font-weight:bold;
     padding: 10px 20px;
     border-radius: 20px;
@@ -16,6 +16,7 @@
     width: 300px;
     height: 100px;
     font-size: 18pt;
+    margin: 25px;
     
 }
 
@@ -63,6 +64,7 @@ section{
     font-family: sans-serif;
     margin: 20px;
     font-weight: bold;
+    padding-top:0.7em;
 }
 
 #slider{
@@ -170,6 +172,11 @@ section{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+
+#toggle-label{
+    font-family:sans-serif;
+    font-size:14pt;
 }
 
 /*
