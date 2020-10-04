@@ -815,7 +815,9 @@ function selectCell(cellNum){
         document.getElementById(currSelectedCell).className = "word-cell not-selected";
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
-        unHighlightPath(prevPathArray[0]);
+        if(prevPathArray.length != 0){
+            unHighlightPath(prevPathArray[0]);
+        }
         //Hightlight the first listed path (if there are multiple possible paths)
         highlightPath(currPathArray[0]);
     }
@@ -827,7 +829,9 @@ function selectCell(cellNum){
         currCell.className = "word-cell not-selected";
         document.getElementById("selected-word").innerHTML = "";
         document.getElementById("selected-path").innerHTML = "";
-        unHighlightPath(prevPathArray[0]);
+        if(prevPathArray.length != 0){
+            unHighlightPath(prevPathArray[0]);
+        }
         // The String is a holder (&nbsp)
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
