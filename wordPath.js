@@ -743,7 +743,7 @@ function unHighlightPath(pathArray){
         rowCol = convertIndexToRowCol(pathArray[i]);
         row = rowCol[0];
         col = rowCol[1];
-        document.getElementById(row + "-" + col).style.backgroundColor = "lavender";
+        document.getElementById(row + "-" + col).style.backgroundColor = "papayawhip";
     }
 
 }
