@@ -258,6 +258,7 @@ function makeGame(){
     console.log("The shuffled letters are: " + shuffledArray);
 
     displayBoard(shuffledArray);
+    unHighlightPath();
 }
 
 makeGame();
