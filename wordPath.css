@@ -60,6 +60,9 @@ section{
 #countdown-timer{
     font-size: 18pt;
     color: teal;
+    font-family: sans-serif;
+    margin: 20px;
+    font-weight: bold;
 }
 
 #slider{
@@ -97,17 +100,20 @@ section{
 
 #vowel-label{
     font-size: 14pt;
-    font-weight: bold;;
+    font-weight: bold;
+    font-family: sans-serif;
 }
 
 #slide-label{
     font-size: 14pt;
-    font-weight: bold;;
+    font-weight: bold;
+    font-family: sans-serif;
 }
 
 #num-vowel{
     font-size: 14pt;
-    font-weight: bold;;
+    font-weight: bold;
+    font-family: sans-serif;
 }
 
 .word-table-body{
@@ -121,6 +127,49 @@ section{
 
 .not-selected{
     background-color: white;
+}
+
+.solve-entry{
+    margin: 20px;
+    font-size: 14pt;
+    color: darkblue;
+    font-family: sans-serif;
+}
+
+#score-holder, #selected-word, #selected-path{
+    margin: 20px;
+    font-size: 14pt;
+    font-family: sans-serif;
+    color: royalblue;
+    font-weight: lighter;
+}
+
+#score-holder-header, #selected-word-header, #selected-path-header{
+    margin: 20px;
+    font-size: 14pt;
+    color: rebeccapurple;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.solve-entry-bound{
+    border: solid 2px slateblue;
+    margin: 20px;
+    border-top-left-radius: 35px;
+    background: linear-gradient(45deg,whitesmoke,thistle);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.countdown-bound{
+    border: solid 2px slateblue;
+    margin: 20px;
+    border-top-left-radius: 35px;
+    background: linear-gradient(45deg,whitesmoke,lemonchiffon);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 /*

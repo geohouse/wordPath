@@ -796,6 +796,7 @@ function highlightPath(pathArray){
 
 // This will keep track of which cell currently has the selection (avoids having to loop through to find it)
 let currSelectedCell = 0;
+let prevPathArray = [];
 
 function selectCell(cellNum){
     let currCell = document.getElementById(cellNum);
@@ -807,7 +808,7 @@ function selectCell(cellNum){
         document.getElementById(currSelectedCell).className = "word-cell not-selected";
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
-        unHighlightPath(currPathArray[0]);
+        unHighlightPath(prevPathArray[0]);
         //Hightlight the first listed path (if there are multiple possible paths)
         highlightPath(currPathArray[0]);
     }
@@ -819,7 +820,7 @@ function selectCell(cellNum){
         currCell.className = "word-cell not-selected";
         document.getElementById("selected-word").innerHTML = "";
         document.getElementById("selected-path").innerHTML = "";
-        unHighlightPath(currPathArray[0]);
+        unHighlightPath(prevPathArray[0]);
         // The String is a holder (&nbsp)
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
@@ -848,6 +849,7 @@ function selectCell(cellNum){
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
+    prevPathArray = currPathArray;
 }
 
 let wordTableRow = undefined;
@@ -952,7 +954,7 @@ function showWordAnswers(){
         }
 
         makeWordTable();
-
+        document.getElementById("score-holder-header").innerHTML = "The total possible score is:";
         document.getElementById("score-holder").innerHTML = scoreCounter;
 
     }
