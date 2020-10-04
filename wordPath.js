@@ -743,8 +743,8 @@ function unHighlightPath(pathArray){
         rowCol = convertIndexToRowCol(pathArray[i]);
         row = rowCol[0];
         col = rowCol[1];
+        document.getElementById(row + "-" + col).style.backgroundColor = "lavender";
     }
-    document.getElementById(row + "-" + col).style.backgroundColor = "lavender";
 
 }
 
@@ -807,7 +807,7 @@ function selectCell(cellNum){
         document.getElementById(currSelectedCell).className = "word-cell not-selected";
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
-
+        unHighlightPath(currPathArray[0]);
         //Hightlight the first listed path (if there are multiple possible paths)
         highlightPath(currPathArray[0]);
     }
