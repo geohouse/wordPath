@@ -740,7 +740,7 @@ function unHighlightPath(pathArray){
 
     // Loop through the path array from left (start of the path) to right (end of the path)
     for(let i = 0; i< pathArray.length; i++){
-        rowCol = convertIndexToRowCol(cellNum);
+        rowCol = convertIndexToRowCol(pathArray[i]);
         row = rowCol[0];
         col = rowCol[1];
     }
@@ -760,7 +760,7 @@ function highlightPath(pathArray){
     let currColor = undefined;
     // Loop through the path array from left (start of the path) to right (end of the path)
     for(let i = 0; i< pathArray.length; i++){
-        rowCol = convertIndexToRowCol(cellNum);
+        rowCol = convertIndexToRowCol(pathArray[i]);
         row = rowCol[0];
         col = rowCol[1];
         // Set the colors for the first and the last letter to be the darkest green and 
