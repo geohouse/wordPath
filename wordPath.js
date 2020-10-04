@@ -264,7 +264,7 @@ function makeGame(){
 
     // Delete previous path highlighting if it exists
     if(prevPathArray.length === 0){
-        unHighlightPath(prevPathArray);
+        unHighlightPath(prevPathArray[0]);
     }
 }
 
