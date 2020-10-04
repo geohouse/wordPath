@@ -639,11 +639,7 @@ function calculateAnswers(index, currRow, currCol){
                 for(let j = 0; j < prevPathList.length; j++){
                     
                     // Because there are nested arrays (one array per different path),
-                    // indexing just by j returns the array around the array of interest,
-                    // so still need to index into it with [0] to get its only entry, which are
-                    // the array elements.
-                    // FUTURE - this is prob. 1 layer more nesting than necessary, and could figure
-                    // out how to remove it.
+                    // indexing just by j returns the array of interest.
                     prevPath = prevPathList[j];
 
                     if(prevPathList.length > 1){
@@ -736,6 +732,64 @@ function calculateAnswers(index, currRow, currCol){
     }
 }
 
+// If a word/path is un-selected, then remove the highlighting
+function unHighlightPath(pathArray){
+    let rowCol = undefined;
+    let row = 0;
+    let col = 0;
+
+    // Loop through the path array from left (start of the path) to right (end of the path)
+    for(let i = 0; i< pathArray.length; i++){
+        rowCol = convertIndexToRowCol(cellNum);
+        row = rowCol[0];
+        col = rowCol[1];
+    }
+    document.getElementById(row + "-" + col).style.backgroundColor = "lavender";
+
+}
+
+
+// For the selected word/path, this will highlight the path taken to form the word
+function highlightPath(pathArray){
+    let rowCol = undefined;
+    let row = 0;
+    let col = 0;
+
+    // Colors from green (left) to purple (right)
+    let colors = ["#1B7837", "#7FBF76", "#D9F0D3", "#E7D4E8", "#AF8DC3", "#762A83"];
+    let currColor = undefined;
+    // Loop through the path array from left (start of the path) to right (end of the path)
+    for(let i = 0; i< pathArray.length; i++){
+        rowCol = convertIndexToRowCol(cellNum);
+        row = rowCol[0];
+        col = rowCol[1];
+        // Set the colors for the first and the last letter to be the darkest green and 
+        // darkest purple, respectively. Choose other colors as evenly spaced as possible if 
+        // word length < 6
+        if(i === 0){
+            currColor = colors[0];
+        } else if(i === pathArray.length - 1){
+            currColor = colors[5];
+        } else if(i === 1 & pathArray.length === 3){
+            currColor = colors[3];
+        } else if(i === 1 & pathArray.length === 4){
+            currColor = colors[2];
+        } else if(i === 2 & pathArray.length === 4){
+            currColor = colors[3];
+        } else if(pathArray.length <= 6){
+            currColor = colors[i];
+        } else{
+            // For longer words than 6 letters, the start is dark green, the end is dark purple,
+            // and all other cells are gray.
+            currColor = "#AAA";
+        }
+
+        document.getElementById(row + "-" + col).style.backgroundColor = currColor;
+    }
+}
+
+
+
 // This is the callback function when a word in the word table is clicked
 // Allows toggling of selections when clicking on another word, or when clicking on the 
 // same word repeatedly
@@ -747,17 +801,25 @@ function selectCell(cellNum){
     let currCell = document.getElementById(cellNum);
     let currWord = Object.keys(completedWordObject)[cellNum];
     let currPathArray = completedWordObject[Object.keys(completedWordObject)[cellNum]];
+    // If a different cell from the current one is selected instead
     if(cellNum != currSelectedCell){
         // Clear any last selection
         document.getElementById(currSelectedCell).className = "word-cell not-selected";
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
         currSelectedCell = cellNum;
+
+        //Hightlight the first listed path (if there are multiple possible paths)
+        highlightPath(currPathArray[0]);
     }
 
     selectedCellText = currCell.innerHTML;
     
+    // If the currently selected cell is clicked again, then de-select it.
     if(currCell.className === "word-cell is-selected"){
         currCell.className = "word-cell not-selected";
+        document.getElementById("selected-word").innerHTML = "";
+        document.getElementById("selected-path").innerHTML = "";
+        unHighlightPath(currPathArray[0]);
         // The String is a holder (&nbsp)
         //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
     } else{
@@ -782,6 +844,7 @@ function selectCell(cellNum){
                 }
             }
         }
+        highlightPath(currPathArray[0]);
         //document.getElementById("selected-word").innerHTML = selectedCellText;
     }
 
