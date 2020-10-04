@@ -243,6 +243,9 @@ function displayBoard(shuffledArray){
 }
 
 setUpGrid();
+
+let prevPathArray = [];
+
 function makeGame(){
     
     clearGrid();
@@ -258,7 +261,11 @@ function makeGame(){
     console.log("The shuffled letters are: " + shuffledArray);
 
     displayBoard(shuffledArray);
-    unHighlightPath();
+
+    // Delete previous path highlighting if it exists
+    if(prevPathArray.length === 0){
+        unHighlightPath(prevPathArray);
+    }
 }
 
 makeGame();
@@ -797,7 +804,6 @@ function highlightPath(pathArray){
 
 // This will keep track of which cell currently has the selection (avoids having to loop through to find it)
 let currSelectedCell = 0;
-let prevPathArray = [];
 
 function selectCell(cellNum){
     let currCell = document.getElementById(cellNum);
