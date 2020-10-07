@@ -10,12 +10,23 @@ do {
       console.log("in for");
     if(i < (inputArray.length - 1)){
         console.log("in if");
-        currEntry = inputArray[i];
-        nextEntry = inputArray[i+1];
+        // If the first character is a string, make lowercase before converting to char code, else don't
+        if(isNaN(inputArray[i])){
+            currEntry = inputArray[i].toLowerCase().charCodeAt(0);
+        } else{
+            currEntry = inputArray[i].charCodeAt(0);
+        }
+
+        if(isNaN(inputArray[i + 1])){
+            nextEntry = inputArray[i + 1].toLowerCase().charCodeAt(0);
+        } else{
+            nextEntry = inputArray[i + 1].charCodeAt(0);
+        }
+        console.log("The current entry is: " + currEntry + " and the next entry is: " + nextEntry);
         if(nextEntry < currEntry){
             console.log("in if 2");
-          temp = currEntry;
-          inputArray[i] = nextEntry;
+          temp = inputArray[i];
+          inputArray[i] = inputArray[i + 1];
           inputArray[i+1] = temp;
           isSwapped = true;
         }
@@ -27,7 +38,7 @@ do {
   return inputArray;
 }
 
-let arrayTest = [87,1,23,12,67,102,23,42,2];
+let arrayTest = ['Gussy','apple','taco','Nicki','Blue', 'natto', 'Wild','ocean','moss','stump','75'];
 console.log(arrayTest);
 let sortedArray = bubbleSort(arrayTest);
 
