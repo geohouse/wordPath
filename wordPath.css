@@ -179,6 +179,11 @@ label{
     font-size:14pt;
 }
 
+#sort-alpha{
+    background-color:white;
+    border: solid 1px white;
+}
+
 /*
   .slider::-moz-range-thumb {
     width: 25px;

@@ -863,6 +863,24 @@ function selectCell(cellNum){
     prevPathArray = currPathArray;
 }
 
+// Function to sort the completed words alphabetically
+function sortWordsAZ(){
+    let sortedCompletedWordObject = {};
+    // Sort alphabetically by keys in the object
+    //https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
+    Object.keys(completedWordObject).sort().forEach(function(key){
+        sortedCompletedWordObject[key] = completedWordObject[key];
+    })
+
+    makeWordTable(sortedCompletedWordObject);
+    
+}
+
+    
+    
+    
+    
+
 let wordTableRow = undefined;
 let createdWordCell = undefined;
 let createdPathCell = undefined;
@@ -874,11 +892,12 @@ let scoringObject={3:1, 4:1, 5:2, 6:3, 7:5, 8:11, 9:11, 10:11, 11:11, 12:11, 13:
 // Initialize the table by looping through the desired number of rows first, creating those
 // then looping through the desired number of columns, adding a cell in each row for 
 // each desired column. Set the ID of each table cell to be the <rowNum>-<colNum> (0-based)
-function makeWordTable(){
+function makeWordTable(completedWordObject){
     // reset the table.
     wordTable = document.getElementById("word-table");
     wordTable.innerHTML = "";
     console.log("in make word table")
+    
     for(let i = 0; i < Object.keys(completedWordObject).length; i++){
         wordTableRow = document.createElement('tr');
         wordTable.appendChild(wordTableRow);
@@ -917,6 +936,11 @@ function makeWordTable(){
         wordTableRow.appendChild(createdWordCell);
         // wordTableRow.appendChild(createdPathCell);
     }
+}
+
+function displayScore(){
+    document.getElementById("score-holder-header").innerHTML = "The total possible score is:";
+    document.getElementById("score-holder").innerHTML = scoreCounter;
 }
 
 // Due to the tracking of multiple potential paths for each word,
@@ -964,9 +988,14 @@ function showWordAnswers(){
             calculateAnswers(i, currRow, currCol);
         }
 
-        makeWordTable();
-        document.getElementById("score-holder-header").innerHTML = "The total possible score is:";
-        document.getElementById("score-holder").innerHTML = scoreCounter;
+        makeWordTable(completedWordObject);
+        displayScore();
+
+        // Also make the button option to sort alphabetically visible (was hidden with white color)
+        let sortWords = document.getElementById("sort-alpha");
+        sortWords.style.backgroundColor = "rebeccapurple";
+        sortWords.innerHTML = "Sort words alphabetically";
+        sortWords.style.color = "white";
 
     }
     
@@ -974,6 +1003,9 @@ function showWordAnswers(){
 
 let toggle = document.getElementById("toggle");
 toggle.addEventListener("click", showWordAnswers);
+
+let sortWords = document.getElementById("sort-alpha");
+sortWords.addEventListener("click", sortWordsAZ)
 
 // <!-- Display the countdown timer in an element -->
 // <p id="demo"></p>
