@@ -863,6 +863,28 @@ function selectCell(cellNum){
     prevPathArray = currPathArray;
 }
 
+
+// This will allow toggling of the word sorting between alphabetical and default (by length for each die
+// within the grid)
+let toggleSort = true;
+
+function toggleSortType(){
+    // When button is clicked, start by changing the sorting to alphabetical
+    if(toggleSort){
+        sortWordsAZ();
+        toggleSort = false;
+        // Also make the button option to sort alphabetically visible (was hidden with white color)
+        let sortWords = document.getElementById("sort-alpha");
+        sortWords.innerHTML = "Sort words by order of dice in grid";
+
+    } else {
+        makeWordTable(completedWordObject);
+        toggleSort = true;
+        sortWords.innerHTML = "Sort words alphabetically";
+    }
+
+}
+
 // Function to sort the completed words alphabetically
 function sortWordsAZ(){
     let sortedCompletedWordObject = {};
@@ -875,10 +897,6 @@ function sortWordsAZ(){
     makeWordTable(sortedCompletedWordObject);
     
 }
-
-    
-    
-    
     
 
 let wordTableRow = undefined;
@@ -996,6 +1014,8 @@ function showWordAnswers(){
         sortWords.style.backgroundColor = "rebeccapurple";
         sortWords.innerHTML = "Sort words alphabetically";
         sortWords.style.color = "white";
+        sortWords.style.height = "50px";
+        sortWords.style.width = "70px";
 
     }
     
@@ -1005,7 +1025,7 @@ let toggle = document.getElementById("toggle");
 toggle.addEventListener("click", showWordAnswers);
 
 let sortWords = document.getElementById("sort-alpha");
-sortWords.addEventListener("click", sortWordsAZ)
+sortWords.addEventListener("click", toggleSortType)
 
 // <!-- Display the countdown timer in an element -->
 // <p id="demo"></p>
