@@ -1014,8 +1014,11 @@ function showWordAnswers(){
         sortWords.style.backgroundColor = "rebeccapurple";
         sortWords.innerHTML = "Sort words alphabetically";
         sortWords.style.color = "white";
-        sortWords.style.height = "50px";
-        sortWords.style.width = "70px";
+        sortWords.style.height = "100px";
+        sortWords.style.width = "150px";
+        sortWords.style.fontFamily = "sans-serif";
+        sortWords.style.fontSize = "14pt";
+        sortWords.style.margin = "20px";
 
     }
     
