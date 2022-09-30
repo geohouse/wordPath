@@ -1,81 +1,83 @@
 <!DOCTYPE html>
 
 <html lang="en-US">
-
-<head>
-
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="wordPath.css">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="wordPath.css" />
     <script src="wordPath.js" defer></script>
+  </head>
 
-
-</head>
-
-<body>
+  <body>
     <div>
-        <button type="button" id="new-game">Re-shuffle for a new game</button>
+      <button type="button" id="new-game">Re-shuffle for a new game</button>
     </div>
 
     <div>
-    <input type="checkbox" id="toggle" unchecked>
-        <label for="toggle">Check to show list of words found in this puzzle</label>
+      <input type="checkbox" id="toggle" unchecked />
+      <label for="toggle"
+        >Check to show list of words found in this puzzle</label
+      >
     </div>
 
     <div class="slider-div">
-        <input type="range" id = "slider" name= "slider" min="1" max = "10" step="1" value="5">
-        <label id="slide-label" for="slider">Number of vowels to include</label>
+      <input
+        type="range"
+        id="slider"
+        name="slider"
+        min="1"
+        max="10"
+        step="1"
+        value="5"
+      />
+      <label id="slide-label" for="slider">Number of vowels to include</label>
     </div>
 
     <div>
-        <p>
-            <span id="num-vowel">5</span>
-            <span id="vowel-label">vowels will be included</span>
-        </p>
+      <p>
+        <span id="num-vowel">5</span>
+        <span id="vowel-label">vowels will be included</span>
+      </p>
     </div>
 
     <section id="timer-buttons">
-        <div>
-            <button type="button" id="countdown-start">Start the countdown!</button>
-        </div>
+      <div>
+        <button type="button" id="countdown-start">Start the countdown!</button>
+      </div>
 
-        <div>
-            <button type="button" id="countdown-stop">Stop the countdown!</button>
-        </div>
+      <div>
+        <button type="button" id="countdown-stop">Stop the countdown!</button>
+      </div>
 
-        <div>
-            <button type="button" id="countdown-restart">Reset the countdown!</button>
-        </div>
-
+      <div>
+        <button type="button" id="countdown-restart">
+          Reset the countdown!
+        </button>
+      </div>
     </section>
     <section>
-        <div class="countdown-bound">
-            <p id="countdown-timer">2 min, 0 sec</p>
-        </div>
-        <div class="solve-entry-bound">
-            <p class="solve-entry" id="score-holder-header">The total possible score is:</p>
-            <p class="solve-entry" id="score-holder">&nbsp</p>
-        </div>
-        <div class="solve-entry-bound">
-            <p class="solve-entry" id="selected-word-header">The selected word is:</p>
-            <p class="solve-entry" id="selected-word">&nbsp</p>
-        </div>
-        <div class="solve-entry-bound">
+      <div class="countdown-bound">
+        <p id="countdown-timer">2 min, 0 sec</p>
+      </div>
+      <div class="solve-entry-bound">
+        <p class="solve-entry" id="score-holder-header">
+          The total possible score is:
+        </p>
+        <p class="solve-entry" id="score-holder">&nbsp</p>
+      </div>
+      <!-- <div class="solve-entry-bound">
+        <p class="solve-entry" id="selected-word-header">
+          The selected word is:
+        </p>
+        <p class="solve-entry" id="selected-word">&nbsp</p>
+      </div> -->
+      <!-- <div class="solve-entry-bound">
             <p class="solve-entry" id="selected-path-header">The path of the selected word is:</p>
             <p class="solve-entry" id="selected-path">&nbsp</p>
-        </div>
-        
-        <div>
-            <button type="button" id="sort-alpha">&nbsp</button>
-        </div>
+        </div> -->
 
+      <div>
+        <button type="button" id="sort-alpha">&nbsp</button>
+      </div>
     </section>
-    
-    
-</body>
-
+  </body>
 </html>
-
-
-
-
-

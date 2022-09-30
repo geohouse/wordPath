@@ -1,187 +1,196 @@
-.letter-grid{
-    border: solid black 2px;
-    font-size: 36pt;
-    font-family:monospace;
-    background-color: papayawhip;
-    font-weight:bold;
-    padding: 10px 20px;
-    border-radius: 20px;
-    
+.letter-grid {
+  border: solid black 2px;
+  font-size: 36pt;
+  font-family: monospace;
+  background-color: papayawhip;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
 }
 
-#new-game{
-    background-color: yellow;
-    border: solid rebeccapurple 5px;
-    border-radius: 10px;
-    width: 300px;
-    height: 100px;
-    font-size: 18pt;
-    margin: 25px;
-    
+#new-game {
+  background-color: yellow;
+  border: solid rebeccapurple 5px;
+  border-radius: 10px;
+  width: 300px;
+  height: 100px;
+  font-size: 18pt;
+  margin: 25px;
 }
 
-#countdown-start{
-    background-color: lightgreen;
-    border-radius: 10px;
-    width: 200px;
-    height: 75px;
-    font-size: 18pt;
-
+#countdown-start {
+  background-color: lightgreen;
+  border-radius: 10px;
+  width: 200px;
+  height: 75px;
+  font-size: 18pt;
 }
 
-#countdown-stop{
-    background-color: lightsalmon;
-    border-radius: 10px;
-    width: 200px;
-    height: 75px;
-    font-size: 18pt;
-
+#countdown-stop {
+  background-color: lightsalmon;
+  border-radius: 10px;
+  width: 200px;
+  height: 75px;
+  font-size: 18pt;
 }
 
-.word-cell{
-    font-family: monospace;
-    font-size: 14pt;
-    border: solid 1px teal;
-    border-collapse: collapse;
+.word-cell {
+  font-family: monospace;
+  font-size: 14pt;
+  border: solid 1px teal;
+  border-collapse: collapse;
 }
 
-#countdown-restart{
-    background-color: lightsteelblue;
-    border-radius: 10px;
-    width: 200px;
-    height: 75px;
-    font-size: 18pt;
-
+#countdown-restart {
+  background-color: lightsteelblue;
+  border-radius: 10px;
+  width: 200px;
+  height: 75px;
+  font-size: 18pt;
 }
 
-section{
-    display:flex;
+section {
+  display: flex;
 }
 
-#countdown-timer{
-    font-size: 18pt;
-    color: teal;
-    font-family: sans-serif;
-    margin: 20px;
-    font-weight: bold;
-    padding-top:0.7em;
+#countdown-timer {
+  font-size: 18pt;
+  color: teal;
+  font-family: sans-serif;
+  margin: 20px;
+  font-weight: bold;
+  padding-top: 0.7em;
 }
 
-#slider{
-    width: 40%;
-    height: 30px;
-    background: lightgray;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    border: solid gray 2px;
-    border-radius: 5px;
+#slider {
+  width: 40%;
+  height: 30px;
+  background: lightgray;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border: solid gray 2px;
+  border-radius: 5px;
 }
 
-#slider:hover{
-    opacity: 1;
+#slider:hover {
+  opacity: 1;
 }
 
-#slider::-webkit-slider-thumb{
-    appearance: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: greenyellow;
-    cursor: pointer;
+#slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: greenyellow;
+  cursor: pointer;
 }
 
-#slider::-moz-slider-thumb{
-    appearance: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: greenyellow;
-    cursor: pointer;
+#slider::-moz-slider-thumb {
+  appearance: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: greenyellow;
+  cursor: pointer;
 }
 
-#vowel-label{
-    font-size: 14pt;
-    font-weight: bold;
-    font-family: sans-serif;
+#vowel-label {
+  font-size: 14pt;
+  font-weight: bold;
+  font-family: sans-serif;
 }
 
-#slide-label{
-    font-size: 14pt;
-    font-weight: bold;
-    font-family: sans-serif;
+#slide-label {
+  font-size: 14pt;
+  font-weight: bold;
+  font-family: sans-serif;
 }
 
-#num-vowel{
-    font-size: 14pt;
-    font-weight: bold;
-    font-family: sans-serif;
+#num-vowel {
+  font-size: 14pt;
+  font-weight: bold;
+  font-family: sans-serif;
 }
 
-.word-table-body{
-    overflow:auto;
-    height: 300px;
+.word-table-body {
+  overflow-x: visible;
+  overflow-y: scroll;
+  height: 300px;
+  width: auto;
+  margin-left: 30px;
 }
 
-.is-selected{
-    background-color:violet;
+.is-selected {
+  background-color: violet;
 }
 
-.not-selected{
-    background-color: white;
+.not-selected {
+  background-color: white;
 }
 
-.solve-entry{
-    margin: 20px;
-    font-size: 14pt;
-    color: darkblue;
-    font-family: sans-serif;
+.solve-entry {
+  margin: 20px;
+  font-size: 14pt;
+  color: darkblue;
+  font-family: sans-serif;
 }
 
-#score-holder, #selected-word, #selected-path{
-    margin: 20px;
-    font-size: 14pt;
-    font-family: sans-serif;
-    color: royalblue;
-    font-weight: lighter;
+#score-holder,
+#selected-word,
+#selected-path {
+  margin: 20px;
+  font-size: 14pt;
+  font-family: sans-serif;
+  color: royalblue;
+  font-weight: lighter;
 }
 
-#score-holder-header, #selected-word-header, #selected-path-header{
-    margin: 20px;
-    font-size: 14pt;
-    color: rebeccapurple;
-    font-family: sans-serif;
-    font-weight: bold;
+#score-holder-header,
+#selected-word-header,
+#selected-path-header {
+  margin: 20px;
+  font-size: 14pt;
+  color: rebeccapurple;
+  font-family: sans-serif;
+  font-weight: bold;
 }
 
-.solve-entry-bound{
-    border: solid 2px slateblue;
-    margin: 20px;
-    border-top-left-radius: 35px;
-    background: linear-gradient(45deg,whitesmoke,thistle);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+.solve-entry-bound {
+  visibility: hidden;
+  border: solid 2px slateblue;
+  margin: 20px;
+  border-top-left-radius: 35px;
+  background: linear-gradient(45deg, whitesmoke, thistle);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
-.countdown-bound{
-    border: solid 2px slateblue;
-    margin: 20px;
-    border-top-left-radius: 35px;
-    background: linear-gradient(45deg,whitesmoke,lemonchiffon);
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+.countdown-bound {
+  border: solid 2px slateblue;
+  margin: 20px;
+  border-top-left-radius: 35px;
+  background: linear-gradient(45deg, whitesmoke, lemonchiffon);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
-label{
-    font-family:sans-serif;
-    font-size:14pt;
+label {
+  font-family: sans-serif;
+  font-size: 14pt;
 }
 
-#sort-alpha{
-    background-color:white;
-    border: solid 1px white;
+#sort-alpha {
+  visibility: hidden;
+  background-color: rebeccapurple;
+  color: white;
+  height: 100px;
+  width: 150px;
+  font-family: sans-serif;
+  font-size: 14pt;
+  margin: 20px;
 }
 
 /*
