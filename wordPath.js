@@ -300,8 +300,10 @@ function endCountdown() {
   // so that if the countdown's started again, it picks up from where the previous
   // countdown ended
   let htmlText = document.getElementById("countdown-timer").innerHTML;
-  let minuteEntry = Number(htmlText.split(" min")[0]);
-  let secondEntry = Number(htmlText.split(", ")[1].split(" sec")[0]);
+  let minuteEntry = Number.parseInt(htmlText.split(":")[0], 10);
+  let secondEntry = Number.parseInt(htmlText.split(":")[1], 10);
+  //   let minuteEntry = Number(htmlText.split(" min")[0]);
+  //   let secondEntry = Number(htmlText.split(", ")[1].split(" sec")[0]);
   let secondsAsFracMin = secondEntry / 60;
   timeRemaining = minuteEntry + secondsAsFracMin;
   console.log("Setting the time remaining to be: " + timeRemaining);
@@ -314,8 +316,7 @@ function endCountdown() {
 
 function restartCountdown() {
   timeRemaining = timerLength;
-  document.getElementById("countdown-timer").innerHTML =
-    timeRemaining + " min, 0 sec";
+  document.getElementById("countdown-timer").innerHTML = timeRemaining + ":00";
   document.getElementById("countdown-start").innerHTML = "Start the countdown!";
 }
 
@@ -329,9 +330,15 @@ function countdownTimer() {
   console.log("Now is: " + now);
   let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  let minutesString = minutes.toString();
+  let secondsString = seconds.toString();
+  // Pad the seconds entry with a left zero as needed to make it be 2 digits total
+  // used when < 10
+  let secondsStringPadded = secondsString.padStart(2, "0");
 
-  document.getElementById("countdown-timer").innerHTML =
-    minutes + " min, " + seconds + " sec";
+  document.getElementById(
+    "countdown-timer"
+  ).innerHTML = `${minutesString}:${secondsStringPadded}`;
 
   if (diff < 0) {
     clearInterval(countDown);
@@ -918,9 +925,9 @@ function selectCell(cellNum) {
 
   // If the currently selected cell is clicked again, then de-select it.
   if (currCell.className === "word-cell is-selected") {
-    currCell.className = "word-cell not-selected";
-    document.getElementById("selected-word").innerHTML = "";
-    document.getElementById("selected-path").innerHTML = "";
+    currCell.classList.remove("is-selected");
+    //document.getElementById("selected-word").innerHTML = "";
+    //document.getElementById("selected-path").innerHTML = "";
     if (prevPathArray.length != 0) {
       unHighlightPath(prevPathArray[0]);
     }
@@ -928,31 +935,36 @@ function selectCell(cellNum) {
     //document.getElementById("selected-word").innerHTML = String.fromCharCode(160);
   } else {
     currCell.className = "word-cell is-selected";
-    document.getElementById("selected-word-header").innerHTML =
-      "The selected word is:";
-    document.getElementById("selected-word").innerHTML = currWord;
+    //document.getElementById("selected-word-header").innerHTML =
+    //  "The selected word is:";
+    //document.getElementById("selected-word").innerHTML = currWord;
 
-    document.getElementById("selected-path-header").innerHTML =
-      "The path of the selected word is:";
+    // Generally works to print the path of the current word,
+    // but commented out because it's no longer shown in the game
+    // as a path of indices like generates below, but instead as the
+    // visual path through the dies.
+
+    //document.getElementById("selected-path-header").innerHTML =
+    //  "The path of the selected word is:";
     // The path is either a single path (if only 1 way to make the word), or multiple paths
     // (multiple ways to make the word). If multiple, add to the entry with semi-colons separating each path.
-    if (currPathArray.length === 1) {
-      document.getElementById("selected-path").innerHTML = currPathArray[0];
-    } else {
-      for (let i = 0; i < currPathArray.length; i++) {
-        // Initialize the innerHTML entry
-        if (i == 0) {
-          document.getElementById("selected-path").innerHTML =
-            currPathArray[i] + ";";
-        } else if (i < currPathArray.length - 1) {
-          document.getElementById("selected-path").innerHTML +=
-            currPathArray[i] + ";";
-        } else {
-          document.getElementById("selected-path").innerHTML +=
-            currPathArray[i];
-        }
-      }
-    }
+    // if (currPathArray.length === 1) {
+    //   document.getElementById("selected-path").innerHTML = currPathArray[0];
+    // } else {
+    //   for (let i = 0; i < currPathArray.length; i++) {
+    //     // Initialize the innerHTML entry
+    //     if (i == 0) {
+    //       document.getElementById("selected-path").innerHTML =
+    //         currPathArray[i] + ";";
+    //     } else if (i < currPathArray.length - 1) {
+    //       document.getElementById("selected-path").innerHTML +=
+    //         currPathArray[i] + ";";
+    //     } else {
+    //       document.getElementById("selected-path").innerHTML +=
+    //         currPathArray[i];
+    //     }
+    //   }
+    // }
     highlightPath(currPathArray[0]);
     //document.getElementById("selected-word").innerHTML = selectedCellText;
   }
@@ -1095,18 +1107,17 @@ function showWordAnswers() {
     completedWordObject = {};
     console.log("Showing answers");
     console.log(letterArray);
+    document.querySelector("#score-holder-header").innerHTML =
+      "Solving the puzzle...";
+    let scoreHolder = document.querySelector(".solve-entry-bound");
+    scoreHolder.style.visibility = "visible";
+    // document.querySelector("#score-holder-header").innerHTML =
+    //   "Solving the puzzle...";
+    // let scoreHolder = document.querySelector(".solve-entry-bound");
+    // scoreHolder.style.visibility = "visible";
     // Provides object of arrays, with keys for each letter, and values for all words
     // starting with that letter in the var splitByFirstLetter_obj
     splitArrayByFirstLetter();
-
-    // let testOut1 = checkIfWordStartInList("aardvark");
-    // console.log("testOut1 is: " + testOut1);
-
-    // let testOut2 = checkIfWordStartInList("cat");
-    // console.log("testOut2 is: " + testOut2);
-
-    // let testOut3 = checkIfWordStartInList("axz");
-    // console.log("testOut3 is: " + testOut3);
 
     calculateTwoLetterStems();
     // There are 365 2-letter stems represented from words (of 676 of the possible combos [26 * 26])
@@ -1118,6 +1129,7 @@ function showWordAnswers() {
       currRow = Math.floor(i / 4);
       currCol = i - 4 * currRow;
       console.log("calculateAnswers called.");
+      // This is a time-intensive step
       calculateAnswers(i, currRow, currCol);
     }
 
@@ -1126,8 +1138,6 @@ function showWordAnswers() {
 
     sortWords.style.visibility = "visible";
 
-    let scoreHolder = document.querySelector(".solve-entry-bound");
-    scoreHolder.style.visibility = "visible";
     // Also make the button option to sort alphabetically visible (was hidden with white color)
     //let sortWords = document.getElementById("sort-alpha");
     // sortWords.style.backgroundColor = "rebeccapurple";
@@ -1140,6 +1150,27 @@ function showWordAnswers() {
     // sortWords.style.margin = "20px";
   }
 }
+
+// An attempt to pre-process the words, but not currently working.
+// Seems the 2 letter stems aren't calculating properly before trying to find the words.
+// function prepWordAnswers() {
+//   splitArrayByFirstLetter();
+
+//   calculateTwoLetterStems();
+//   // There are 365 2-letter stems represented from words (of 676 of the possible combos [26 * 26])
+//   console.log("The two letter stems are: ");
+//   console.log(representedTwoLetterStems);
+
+//   // Start with each die in the 16 grid, and try to build words out from there.
+//   for (let i = 0; i < 16; i++) {
+//     currRow = Math.floor(i / 4);
+//     currCol = i - 4 * currRow;
+//     console.log("calculateAnswers called.");
+//     // This is a time-intensive step
+//     calculateAnswers(i, currRow, currCol);
+//   }
+// }
+// prepWordAnswers();
 
 let toggle = document.getElementById("toggle");
 // Always render the checkbox as unclicked.

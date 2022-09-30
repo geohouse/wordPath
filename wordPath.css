@@ -1,3 +1,14 @@
+/* Simple and fresh color scheme from:
+https://www.canva.com/learn/website-color-schemes/ 
+Originally designed by https://madebyshape.co.uk/*/
+:root {
+  --color-dark: #414141;
+  --color-mint: #ccdfcb;
+  --color-watermelon: #ff6a5c;
+  --color-teal: #056571;
+  --color-lightgray: #eeeeee;
+  --color-darkgray: #333333;
+}
 .letter-grid {
   border: solid black 2px;
   font-size: 36pt;
@@ -9,29 +20,36 @@
 }
 
 #new-game {
-  background-color: yellow;
-  border: solid rebeccapurple 5px;
-  border-radius: 10px;
+  background-color: var(--color-teal);
+  border: solid var(--color-watermelon) 2px;
+  /* border-radius: 10px; */
   width: 300px;
   height: 100px;
   font-size: 18pt;
   margin: 25px;
+  color: var(--color-lightgray);
 }
 
 #countdown-start {
-  background-color: lightgreen;
-  border-radius: 10px;
+  background-color: var(--color-teal);
+  /* border-radius: 10px; */
+  border: none;
   width: 200px;
   height: 75px;
   font-size: 18pt;
+  margin: 0 2px;
+  color: var(--color-lightgray);
 }
 
 #countdown-stop {
-  background-color: lightsalmon;
-  border-radius: 10px;
+  background-color: var(--color-watermelon);
+  /* border-radius: 10px; */
+  border: none;
   width: 200px;
   height: 75px;
   font-size: 18pt;
+  margin: 0 2px;
+  color: var(--color-darkgray);
 }
 
 .word-cell {
@@ -42,24 +60,45 @@
 }
 
 #countdown-restart {
-  background-color: lightsteelblue;
-  border-radius: 10px;
+  background-color: var(--color-lightgray);
+  /* border-radius: 10px; */
+  border: none;
   width: 200px;
   height: 75px;
   font-size: 18pt;
+  margin: 0 2px;
+  color: var(--color-darkgray);
 }
 
 section {
   display: flex;
 }
 
+.countdown-bound {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 2px var(--color-teal) solid;
+  margin: 20px 10px 20px 2px;
+  background: linear-gradient(45deg, var(--color-lightgray), var(--color-mint));
+  width: 25%;
+  /* border: solid 2px slateblue;
+  margin: 20px;
+  border-top-left-radius: 35px;
+  background: linear-gradient(45deg, whitesmoke, lemonchiffon);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; */
+}
+
 #countdown-timer {
-  font-size: 18pt;
-  color: teal;
+  font-size: 30pt;
+  color: var(--color-teal);
   font-family: sans-serif;
   margin: 20px;
   font-weight: bold;
-  padding-top: 0.7em;
+  /* padding-top: 0.7em; */
 }
 
 #slider {
@@ -122,7 +161,7 @@ section {
 }
 
 .is-selected {
-  background-color: violet;
+  background-color: var(--color-watermelon);
 }
 
 .not-selected {
@@ -131,12 +170,12 @@ section {
 
 .solve-entry {
   margin: 20px;
-  font-size: 14pt;
-  color: darkblue;
+  font-size: 24pt;
+  font-weight: bold;
+  color: var(--color-dark);
   font-family: sans-serif;
 }
 
-#score-holder,
 #selected-word,
 #selected-path {
   margin: 20px;
@@ -146,7 +185,6 @@ section {
   font-weight: lighter;
 }
 
-#score-holder-header,
 #selected-word-header,
 #selected-path-header {
   margin: 20px;
@@ -158,23 +196,21 @@ section {
 
 .solve-entry-bound {
   visibility: hidden;
-  border: solid 2px slateblue;
+  background-color: var(--color-mint);
+  margin: 20px 10px 20px 10px;
+  border: 2px solid var(--color-dark);
+  /* border: solid 2px slateblue;
   margin: 20px;
   border-top-left-radius: 35px;
-  background: linear-gradient(45deg, whitesmoke, thistle);
+  background: linear-gradient(45deg, var(--color-mint), var(--color-dark));
   border-top-right-radius: 5px;
   border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 10px; */
 }
 
-.countdown-bound {
-  border: solid 2px slateblue;
-  margin: 20px;
-  border-top-left-radius: 35px;
-  background: linear-gradient(45deg, whitesmoke, lemonchiffon);
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+#score-holder-header {
+  color: var(--color-dark);
+  font-weight: normal;
 }
 
 label {
@@ -184,8 +220,8 @@ label {
 
 #sort-alpha {
   visibility: hidden;
-  background-color: rebeccapurple;
-  color: white;
+  background-color: var(--color-dark);
+  color: var(--color-mint);
   height: 100px;
   width: 150px;
   font-family: sans-serif;
